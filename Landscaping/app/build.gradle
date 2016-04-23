@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "xzy.zzia.landscaping"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.android.support:design:23.3.0'
+
+    compile 'com.jaeger.statusbaruitl:library:1.0.0'
+
+    /** 实现图片轮播&弹窗dialog*/
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
+    compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.6@aar'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    /** 实现侧滑*/
+    compile('com.mikepenz:materialdrawer:5.2.0@aar') {
+        transitive = true
+    }
+    /** 实现viewpager滑动指示器*/
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.0@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.6.0@aar'
+}
