@@ -1,4 +1,4 @@
-package xzy.zzia.com.landscaping.util;
+package xzy.zzia.com.landscaping.utils;
 
 import android.content.Context;
 import android.widget.Toast;

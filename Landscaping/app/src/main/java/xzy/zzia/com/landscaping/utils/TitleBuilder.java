@@ -1,4 +1,4 @@
-package xzy.zzia.com.landscaping.util;
+package xzy.zzia.com.landscaping.utils;
 
 import android.app.Activity;
 import android.text.TextUtils;

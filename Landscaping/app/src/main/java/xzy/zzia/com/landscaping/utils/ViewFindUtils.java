@@ -1,4 +1,4 @@
-package xzy.zzia.com.landscaping.util;
+package xzy.zzia.com.landscaping.utils;
 
 import android.util.SparseArray;
 import android.view.View;
