@@ -1,10 +1,9 @@
 package xzy.zzia.com.landscaping.activity;
 
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -13,13 +12,17 @@ import android.widget.Toast;
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
 import com.flyco.dialog.listener.OnBtnClickL;
-
 import com.flyco.dialog.widget.MaterialDialog;
-import com.jaeger.library.StatusBarUtil;
+import com.nostra13.universalimageloader.core.ImageLoader;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import xzy.zzia.com.landscaping.R;
-import xzy.zzia.com.landscaping.service.LocationService;
+import xzy.zzia.com.landscaping.bean.User;
+import xzy.zzia.com.landscaping.utils.ConnService;
 import xzy.zzia.com.landscaping.utils.FragmentController;
+import xzy.zzia.com.landscaping.utils.ServiceGenerator;
 import xzy.zzia.com.landscaping.view.MoreWindow;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -28,28 +31,47 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     private ImageView add;
     private FragmentController controller;
     private MoreWindow moreWindow;
-    private Intent intent;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        intent = new Intent(getApplicationContext(), LocationService.class);
-        startService(intent);
-
         setContentView(R.layout.activity_main);
-        StatusBarUtil.setColor(MainActivity.this, Color.RED);
-        StatusBarUtil.setTranslucent(MainActivity.this, 200);
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         controller = FragmentController.getInstance(this, R.id.fl_content);
         controller.showFragments(0);
+
         initView();
+        initEvent();
+
     }
+
+    private void initEvent() {
+        ConnService service = ServiceGenerator.createService(ConnService.class);
+        Call<User> call = service.getUser();
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                Log.e("roy", response.body().toString() + "");
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Log.e("roy", t.toString() + "");
+
+            }
+        });
+    }
+
 
     private void initView() {
         radioGroup = (RadioGroup) findViewById(R.id.group);
 
         add = (ImageView) findViewById(R.id.image_add);
+
+
         radioGroup.setOnCheckedChangeListener(this);
         add.setOnClickListener(this);
     }
@@ -83,6 +105,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         moreWindow.showMoreWindow(view);
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -90,7 +113,8 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         if (null != moreWindow) {
             moreWindow.destroy();
         }
-        stopService(intent);
+
+        ImageLoader.getInstance().clearMemoryCache();
     }
 
     @Override

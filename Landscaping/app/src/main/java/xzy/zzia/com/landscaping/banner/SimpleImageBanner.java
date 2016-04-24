@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.flyco.banner.widget.Banner.BaseIndicatorBanner;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
 
 import xzy.zzia.com.landscaping.R;
 import xzy.zzia.com.landscaping.bean.BannerItem;
@@ -22,6 +25,8 @@ import xzy.zzia.com.landscaping.utils.ViewFindUtils;
  */
 public class SimpleImageBanner extends BaseIndicatorBanner<BannerItem, SimpleImageBanner> {
     private ColorDrawable colorDrawable;
+    private ImageLoader imageLoader;
+    private DisplayImageOptions options;
 
     public SimpleImageBanner(Context context) {
         this(context, null, 0);
@@ -34,6 +39,11 @@ public class SimpleImageBanner extends BaseIndicatorBanner<BannerItem, SimpleIma
     public SimpleImageBanner(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         colorDrawable = new ColorDrawable(Color.parseColor("#555555"));
+        imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
     }
 
     @Override
@@ -56,12 +66,15 @@ public class SimpleImageBanner extends BaseIndicatorBanner<BannerItem, SimpleIma
         String imgUrl = item.imgUrl;
 
         if (!TextUtils.isEmpty(imgUrl)) {
-            Glide.with(mContext)
-                    .load(imgUrl)
-                    .override(itemWidth, itemHeight)
-                    .centerCrop()
-                    .placeholder(colorDrawable)
-                    .into(iv);
+//            Glide.with(mContext)
+//                    .load(imgUrl)
+//                    .override(itemWidth, itemHeight)
+//                    .centerCrop()
+//                    .placeholder(colorDrawable)
+//                    .into(iv);
+
+            imageLoader.displayImage(imgUrl, iv,options);
+
         } else {
             iv.setImageDrawable(colorDrawable);
         }

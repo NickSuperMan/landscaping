@@ -27,7 +27,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        new TitleBuilder(this).setLeftImage(android.R.drawable.ic_menu_delete).setLeftClickListener(new View.OnClickListener() {
+        new TitleBuilder(this).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

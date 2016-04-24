@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_titile" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_below="@+id/rl_titlebar"
+        android:background="#dedede" />
+
+    <ImageView
+        android:id="@+id/weather_pic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/line"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:src="@mipmap/ic_launcher" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weather_pic"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <TextView
+                style="@style/WeatherStyle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/date" />
+
+
+            <TextView
+                android:id="@+id/weather_date"
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016/4/24" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/WeatherStyle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/weather_1" />
+
+            <TextView
+                android:id="@+id/weather_weather"
+
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="天气" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                style="@style/WeatherStyle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/city" />
+
+            <TextView
+                android:id="@+id/weather_city"
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="郑州" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+
+            <TextView
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temperture" />
+
+            <TextView
+                android:id="@+id/weather_temperature"
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="温度" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <TextView
+                style="@style/WeatherStyle"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wind" />
+
+            <TextView
+                android:id="@+id/weather_wind"
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="风力" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginTop="3dp"
+            android:background="#dedede" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left">
+
+            <TextView
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/pm25" />
+
+            <TextView
+                android:id="@+id/weather_pm25"
+                style="@style/WeatherStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="pm2.5" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

@@ -3,6 +3,7 @@ package xzy.zzia.com.landscaping.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import xzy.zzia.com.landscaping.activity.ApplyLeaveActivity;
 import xzy.zzia.com.landscaping.activity.LoginActivity;
 import xzy.zzia.com.landscaping.activity.NoteActivity;
 import xzy.zzia.com.landscaping.activity.PersonalActivity;
+import xzy.zzia.com.landscaping.activity.WeatherActivity;
 import xzy.zzia.com.landscaping.app.App;
 import xzy.zzia.com.landscaping.banner.SimpleImageBanner;
 import xzy.zzia.com.landscaping.testData.HomeDatas;
@@ -61,6 +63,17 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View view) {
                 ToastUtils.showShort(getActivity(), "click");
                 result.openDrawer();
+            }
+        }).setRightImage(R.drawable.icon_search).setRightOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Log.e("roy", App.getCity() + "");
+
+                if (App.getCity() != null) {
+                    Log.e("roy", "enter+~~~~~~~~~");
+                    intent2Activity(WeatherActivity.class);
+                }
             }
         }).build();
         initSlideMenu();

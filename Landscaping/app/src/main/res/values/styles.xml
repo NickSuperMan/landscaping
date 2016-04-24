@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WeatherStyle">
+
+        <item name="android:textSize">18sp</item>
+
+    </style>
 
     <style name="RadioButtonBottomTab">
 

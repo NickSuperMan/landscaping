@@ -21,6 +21,7 @@
     <!-- SD卡读取权限，用户写入离线定位数据-->
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name=".app.App"
@@ -40,18 +41,17 @@
         <activity android:name=".activity.PersonalActivity" />
         <activity android:name=".activity.NoteActivity" />
         <activity android:name=".activity.ApplyLeaveActivity" />
+        <activity android:name=".activity.WeatherActivity" />
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="zo2WUtLrjGVX54TmE0ZIwTuxCS0vqI6i" />
-        //key:开发者申请的key
+            android:value="@string/baidu_key" />//key:开发者申请的key
 
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
             android:process=":remote" />
 
-        <service android:name=".service.LocationService" />
     </application>
 
 </manifest>

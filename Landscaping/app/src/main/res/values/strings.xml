@@ -27,4 +27,12 @@
     <string name="account">帐号：</string>
     <string name="password">密码：</string>
     <string name="login">登陆</string>
+    <string name="baidu_key">zo2WUtLrjGVX54TmE0ZIwTuxCS0vqI6i</string>
+    <string name="weather">天气</string>
+    <string name="date">时间：</string>
+    <string name="weather_1">天气：</string>
+    <string name="pm25">PM2.5:</string>
+    <string name="wind">风力：</string>
+    <string name="temperture">温度：</string>
+    <string name="city">城市：</string>
 </resources>
