@@ -3,7 +3,6 @@ package xzy.zzia.com.landscaping.fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +26,16 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import xzy.zzia.com.landscaping.R;
 import xzy.zzia.com.landscaping.activity.ApplyLeaveActivity;
+import xzy.zzia.com.landscaping.activity.LoginActivity;
 import xzy.zzia.com.landscaping.activity.NoteActivity;
 import xzy.zzia.com.landscaping.activity.PersonalActivity;
 import xzy.zzia.com.landscaping.app.App;
 import xzy.zzia.com.landscaping.banner.SimpleImageBanner;
 import xzy.zzia.com.landscaping.testData.HomeDatas;
-import xzy.zzia.com.landscaping.util.DataProvider;
-import xzy.zzia.com.landscaping.util.TitleBuilder;
-import xzy.zzia.com.landscaping.util.ToastUtils;
-import xzy.zzia.com.landscaping.util.ViewFindUtils;
+import xzy.zzia.com.landscaping.utils.DataProvider;
+import xzy.zzia.com.landscaping.utils.TitleBuilder;
+import xzy.zzia.com.landscaping.utils.ToastUtils;
+import xzy.zzia.com.landscaping.utils.ViewFindUtils;
 import xzy.zzia.com.landscaping.view.RoundProgressBar;
 
 /**
@@ -84,7 +84,11 @@ public class HomeFragment extends BaseFragment {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
                         ToastUtils.showShort(getActivity(), "click....");
-                        intent2Activity(PersonalActivity.class);
+                        if (App.isLogin()) {
+                            intent2Activity(PersonalActivity.class);
+                        } else {
+                            intent2Activity(LoginActivity.class);
+                        }
                         return false;
                     }
                 })

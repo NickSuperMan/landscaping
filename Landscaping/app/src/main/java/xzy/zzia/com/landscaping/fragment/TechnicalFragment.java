@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import xzy.zzia.com.landscaping.R;
-import xzy.zzia.com.landscaping.util.TitleBuilder;
+import xzy.zzia.com.landscaping.utils.TitleBuilder;
 
 /**
  * Created by roy on 16/4/18.

@@ -15,7 +15,7 @@ import com.flyco.banner.widget.Banner.BaseIndicatorBanner;
 
 import xzy.zzia.com.landscaping.R;
 import xzy.zzia.com.landscaping.bean.BannerItem;
-import xzy.zzia.com.landscaping.util.ViewFindUtils;
+import xzy.zzia.com.landscaping.utils.ViewFindUtils;
 
 /**
  * Created by roy on 16/4/20.

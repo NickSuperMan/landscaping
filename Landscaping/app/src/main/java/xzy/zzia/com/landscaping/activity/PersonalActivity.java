@@ -10,6 +10,8 @@ import xzy.zzia.com.landscaping.R;
  */
 public class PersonalActivity extends Activity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

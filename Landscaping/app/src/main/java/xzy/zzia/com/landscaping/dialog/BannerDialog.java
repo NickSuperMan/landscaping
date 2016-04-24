@@ -11,9 +11,9 @@ import com.flyco.dialog.widget.base.BottomBaseDialog;
 
 import xzy.zzia.com.landscaping.R;
 import xzy.zzia.com.landscaping.banner.SimpleImageBanner;
-import xzy.zzia.com.landscaping.util.DataProvider;
-import xzy.zzia.com.landscaping.util.ToastUtils;
-import xzy.zzia.com.landscaping.util.ViewFindUtils;
+import xzy.zzia.com.landscaping.utils.DataProvider;
+import xzy.zzia.com.landscaping.utils.ToastUtils;
+import xzy.zzia.com.landscaping.utils.ViewFindUtils;
 
 /**
  * Created by roy on 16/4/20.

@@ -24,4 +24,7 @@
     <string name="technical"><![CDATA[技术&法规]]></string>
     <string name="scene">工地实况</string>
     <string name="menu">主页</string>
+    <string name="account">帐号：</string>
+    <string name="password">密码：</string>
+    <string name="login">登陆</string>
 </resources>

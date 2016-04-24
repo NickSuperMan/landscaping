@@ -1,5 +1,6 @@
 package xzy.zzia.com.landscaping.activity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -17,7 +18,8 @@ import com.flyco.dialog.widget.MaterialDialog;
 import com.jaeger.library.StatusBarUtil;
 
 import xzy.zzia.com.landscaping.R;
-import xzy.zzia.com.landscaping.util.FragmentController;
+import xzy.zzia.com.landscaping.service.LocationService;
+import xzy.zzia.com.landscaping.utils.FragmentController;
 import xzy.zzia.com.landscaping.view.MoreWindow;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener {
@@ -26,10 +28,15 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     private ImageView add;
     private FragmentController controller;
     private MoreWindow moreWindow;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        intent = new Intent(getApplicationContext(), LocationService.class);
+        startService(intent);
+
         setContentView(R.layout.activity_main);
         StatusBarUtil.setColor(MainActivity.this, Color.RED);
         StatusBarUtil.setTranslucent(MainActivity.this, 200);
@@ -83,6 +90,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         if (null != moreWindow) {
             moreWindow.destroy();
         }
+        stopService(intent);
     }
 
     @Override

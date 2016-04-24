@@ -12,8 +12,8 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
 import xzy.zzia.com.landscaping.R;
-import xzy.zzia.com.landscaping.util.TitleBuilder;
-import xzy.zzia.com.landscaping.util.ViewFindUtils;
+import xzy.zzia.com.landscaping.utils.TitleBuilder;
+import xzy.zzia.com.landscaping.utils.ViewFindUtils;
 
 /**
  * Created by roy on 16/4/18.
