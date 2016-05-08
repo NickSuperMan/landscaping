@@ -1,0 +1,4 @@
+include ':app', ':library', ':IMKit', ':vitamio'
+project(":library").projectDir = new File("third_patry/library")
+project(":IMKit").projectDir = new File("third_patry/IMKit")
+project(":vitamio").projectDir = new File("third_patry/vitamio")

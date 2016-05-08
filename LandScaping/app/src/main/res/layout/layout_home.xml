@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:banner="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_titile" />
+
+    <com.zua.landscaping.banner.SimpleImageBanner
+        android:id="@+id/looper"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp"
+        banner:bb_barColor="#88000000"
+        banner:bb_barPaddingBottom="5dp"
+        banner:bb_barPaddingLeft="10dp"
+        banner:bb_barPaddingRight="10dp"
+        banner:bb_barPaddingTop="5dp"
+        banner:bb_delay="2"
+        banner:bb_indicatorCornerRadius="3dp"
+        banner:bb_indicatorGap="8dp"
+        banner:bb_indicatorGravity="RIGHT"
+        banner:bb_indicatorHeight="6dp"
+        banner:bb_indicatorSelectColor="#ffffff"
+        banner:bb_indicatorStyle="CORNER_RECTANGLE"
+        banner:bb_indicatorUnselectColor="#88ffffff"
+        banner:bb_indicatorWidth="6dp"
+        banner:bb_isAutoScrollEnable="true"
+        banner:bb_isBarShowWhenLast="true"
+        banner:bb_isIndicatorShow="true"
+        banner:bb_isLoopEnable="true"
+        banner:bb_isTitleShow="true"
+        banner:bb_period="10"
+        banner:bb_scale="0.5625"
+        banner:bb_textColor="#ffffff"
+        banner:bb_textSize="13.5sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:background="@color/bg_gray_dark"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:orientation="horizontal"
+            android:paddingLeft="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/current_people"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/current_people_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/red"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:paddingRight="5dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/max_people"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/max_people_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/red"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/bg_gray"
+        android:orientation="horizontal"
+        android:paddingTop="10dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/project_start_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2016-04-18"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/project_start"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <com.zua.landscaping.view.RoundProgressBar
+                android:id="@+id/project_circle"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                banner:roundColor="#d1d1d1"
+                banner:roundProgressColor="@color/black"
+                banner:roundWidth="10dp"
+                banner:textColor="#9A32CD"
+                banner:textIsDisplayable="true"
+                banner:textSize="12sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="1px"
+            android:layout_height="match_parent"
+            android:background="@color/black" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/project_cancel_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2017-04-18"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:text="@string/project_cancel"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#dedede"
+        android:paddingTop="5dp" />
+
+    <GridView
+        android:id="@+id/gridView_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:numColumns="2" />
+
+</LinearLayout>

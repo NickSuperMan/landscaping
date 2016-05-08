@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.0 rc3"
+
+    defaultConfig {
+        applicationId "com.zua.landscaping"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+
+}
+
+repositories {
+    maven { url "https://jitpack.io" }
+
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    /** 实现图片轮播&弹窗dialog*/
+    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
+    compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.6@aar'
+    compile 'com.android.support:support-v4:23.3.0'
+    compile 'com.github.bumptech.glide:glide:3.7.0'
+    /** 实现侧滑*/
+    compile('com.mikepenz:materialdrawer:5.2.0@aar') {
+        transitive = true
+    }
+    /** 实现viewpager滑动指示器*/
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.0@aar'
+    //Optional: see how to use the utility.
+    compile 'com.ogaclejapan.smarttablayout:utils-v13:1.6.0@aar'
+    /**实现网络链接*/
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    /**获取图片*/
+    compile project(':library')
+    /**融云库*/
+    /**柱状图库*/
+    compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
+    /**上传库*/
+    compile files('libs/afinal_0.5.1_bin.jar')
+    /**下拉刷新下拉加载*/
+    compile project(':vitamio')
+    compile project(':IMKit')
+
+    compile 'com.github.chrisbanes:PhotoView:1.2.6'
+}

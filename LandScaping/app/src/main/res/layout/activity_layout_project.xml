@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_titile"/>
+
+    <com.github.mikephil.charting.charts.HorizontalBarChart
+        android:layout_marginTop="2dp"
+        android:layout_below="@+id/rl_titlebar"
+        android:id="@+id/chart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/create_excel"/>
+
+    <Button
+        android:layout_alignParentBottom="true"
+        android:id="@+id/create_excel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Excel" />
+
+</RelativeLayout>
