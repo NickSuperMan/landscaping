@@ -69,8 +69,9 @@ public class SplashActivity extends Activity {
         call.enqueue(new Callback<List<Technical>>() {
             @Override
             public void onResponse(Call<List<Technical>> call, Response<List<Technical>> response) {
-                if (response.isSuccess()){
+                if (response.isSuccess()) {
                     technicalList = response.body();
+                    Log.e("roy", technicalList.toString());
                     App.setTechnicalList(technicalList);
                 }
             }

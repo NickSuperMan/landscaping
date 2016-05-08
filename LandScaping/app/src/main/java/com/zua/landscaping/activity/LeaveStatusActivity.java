@@ -43,12 +43,18 @@ public class LeaveStatusActivity extends Activity {
         }).setRightText(getString(R.string.apply_leave)).setRightOnclickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LeaveStatusActivity.this,ApplyLeaveActivity.class));
+                startActivity(new Intent(LeaveStatusActivity.this, ApplyLeaveActivity.class));
             }
         }).build();
 
         getData();
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getData();
     }
 
     private void initView() {

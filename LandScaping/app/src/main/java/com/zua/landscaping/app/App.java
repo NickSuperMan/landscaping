@@ -190,8 +190,6 @@ public class App extends Application implements BDLocationListener {
 
 
     public static boolean isLogin() {
-        isLogin = false;
-
         return isLogin;
     }
 

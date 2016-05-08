@@ -28,6 +28,7 @@
             android:id="@+id/home"
             style="@style/RadioButtonBottomTab"
             android:drawableTop="@drawable/icon_home"
+            android:checked="true"
             android:text="@string/menu" />
 
         <RadioButton

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -42,7 +43,12 @@ public class WeatherActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather);
 
-        new TitleBuilder(this).setTitleText(getString(R.string.weather)).build();
+        new TitleBuilder(this).setTitleText(getString(R.string.weather)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        }).build();
 
         initView();
         initEvent();

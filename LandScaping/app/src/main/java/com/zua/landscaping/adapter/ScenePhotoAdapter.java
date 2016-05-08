@@ -15,6 +15,8 @@ import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.bean.Scene;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,13 +67,19 @@ public class ScenePhotoAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.textView = (TextView) convertView.findViewById(R.id.item_photo_name);
             holder.imageView = (ImageView) convertView.findViewById(R.id.item_photo_image);
+            holder.tv_position = (TextView) convertView.findViewById(R.id.item_photo_position);
+            holder.tv_time = (TextView) convertView.findViewById(R.id.item_photo_time);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         imageLoader.displayImage(Constant.PhotoPath + scenePhotoList.get(position).getScenePicUrl(), holder.imageView, options);
         holder.textView.setText(scenePhotoList.get(position).getSceneDescription());
+        holder.tv_position.setText(scenePhotoList.get(position).getScenePosition());
+        holder.tv_time.setText(format.format(scenePhotoList.get(position).getSceneTime()));
 
         return convertView;
     }
@@ -79,5 +87,7 @@ public class ScenePhotoAdapter extends BaseAdapter {
     class ViewHolder {
         TextView textView;
         ImageView imageView;
+        TextView tv_position;
+        TextView tv_time;
     }
 }

@@ -56,7 +56,10 @@
 
         <activity android:name=".activity.MainActivity" />
 
-        <activity android:name=".activity.ApplyLeaveActivity" />
+        <activity
+            android:name=".activity.ApplyLeaveActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
 
         <activity android:name=".activity.NoteActivity" />
 
@@ -85,6 +88,8 @@
         <activity android:name=".activity.DeviceListActivity" />
 
         <activity android:name=".activity.PhotoPreviewActivity" />
+
+        <activity android:name=".activity.WebActivity"/>
 
 
         <activity

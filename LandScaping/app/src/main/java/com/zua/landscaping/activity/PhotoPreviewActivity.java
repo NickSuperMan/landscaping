@@ -11,6 +11,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.Constant;
 
+import uk.co.senab.photoview.PhotoView;
 import uk.co.senab.photoview.PhotoViewAttacher;
 
 /**
@@ -19,7 +20,7 @@ import uk.co.senab.photoview.PhotoViewAttacher;
 public class PhotoPreviewActivity extends Activity {
 
     private String url;
-    private ImageView imageView;
+    private PhotoView imageView;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
     private PhotoViewAttacher mAttacher;
@@ -37,8 +38,8 @@ public class PhotoPreviewActivity extends Activity {
 
     private void initView() {
 
-        imageView = (ImageView) findViewById(R.id.photo_check);
-        imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        imageView = (PhotoView) findViewById(R.id.photo_check);
+
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)

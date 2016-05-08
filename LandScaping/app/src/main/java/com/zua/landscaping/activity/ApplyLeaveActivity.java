@@ -131,6 +131,7 @@ public class ApplyLeaveActivity extends Activity implements View.OnClickListener
                     if (code.getCode() == 1) {
                         ToastUtils.showShort(ApplyLeaveActivity.this, code.getMessage());
                         clearView();
+                        finish();
                     }
                 }
             }

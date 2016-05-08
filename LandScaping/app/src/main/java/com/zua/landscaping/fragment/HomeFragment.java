@@ -95,7 +95,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         }).build();
 
 
-
         initView();
 
         initEvent();
@@ -106,23 +105,23 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private void getPeople() {
         sign = new Sign();
         final ConnService service = ServiceGenerator.createService(ConnService.class);
-        HashMap<String,String> map = new HashMap<>();
-        map.put("method","people");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("method", "people");
         Call<Sign> call = service.getPeople(map);
         call.enqueue(new Callback<Sign>() {
             @Override
             public void onResponse(Call<Sign> call, Response<Sign> response) {
-                if (response.isSuccess()){
+                if (response.isSuccess()) {
                     sign = response.body();
-                    current_people.setText(sign.getCurrentPeople()+"");
-                    max_people.setText(sign.getTotalPeople()+"");
-                    Log.e("roy",sign.toString());
+                    current_people.setText(sign.getCurrentPeople() + "");
+                    max_people.setText(sign.getTotalPeople() + "");
+                    Log.e("roy", sign.toString());
                 }
             }
 
             @Override
             public void onFailure(Call<Sign> call, Throwable t) {
-                Log.e("roy",t.toString());
+                Log.e("roy", t.toString());
             }
         });
     }
@@ -182,7 +181,9 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                         ToastUtils.showShort(getActivity(), "position------>" + position);
                         switch (position) {
                             case -1:
-
+                                App.setIsLogin(false);
+                                intent2Activity(LoginActivity.class);
+                                activity.finish();
                                 break;
                             case 1:
                                 intent2Activity(LeaveStatusActivity.class);
@@ -196,7 +197,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 })
                 .withSelectedItem(-1)
                 .build();
-
 
         if (!App.isLogin()) {
 
@@ -252,6 +252,5 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         }
 
     }
-
 
 }

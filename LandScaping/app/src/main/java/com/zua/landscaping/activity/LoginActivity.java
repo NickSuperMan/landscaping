@@ -118,6 +118,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                     Log.e("roy", "--onSuccess" + userid);
                     ToastUtils.showShort(LoginActivity.this, "登录成功");
+                    App.setIsLogin(true);
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
                     finish();

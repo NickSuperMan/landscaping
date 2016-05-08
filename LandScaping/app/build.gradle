@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "24.0.0 rc3"
+    buildToolsVersion '24.0.0 rc3'
 
     defaultConfig {
         applicationId "com.zua.landscaping"
@@ -66,6 +66,5 @@ dependencies {
     /**下拉刷新下拉加载*/
     compile project(':vitamio')
     compile project(':IMKit')
-
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
 }
