@@ -4,6 +4,8 @@ package com.zua.landscaping.utils;
 import com.zua.landscaping.bean.Code;
 import com.zua.landscaping.bean.Device;
 import com.zua.landscaping.bean.Leave;
+import com.zua.landscaping.bean.News;
+import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Sign;
@@ -33,6 +35,8 @@ import retrofit2.http.QueryMap;
  */
 public interface ConnService {
 
+    @GET("NewsServlet")
+    Call<List<News>> getAllNews();
 
     @GET("LoginServlet")
     Call<User> getUser();
@@ -90,6 +94,28 @@ public interface ConnService {
 
     @POST("TechnicalServlet")
     Call<List<Technical>> getAllTechnical();
+
+    @POST("NoteServlet")
+    Call<List<Note>> getAllNotes(
+            @Query("userId") String userId,
+            @Query("method") String method
+    );
+
+    @POST("NoteServlet")
+    Call<Code> addNote(
+            @QueryMap HashMap<String, String> map
+    );
+
+    @POST("NoteServlet")
+    Call<Code> updateNote(
+            @QueryMap HashMap<String, String> map
+    );
+
+    @POST("NoteServlet")
+    Call<Code> deleteNote(
+            @Query("noteId") String noteId,
+            @Query("method") String method
+    );
 }
 
 

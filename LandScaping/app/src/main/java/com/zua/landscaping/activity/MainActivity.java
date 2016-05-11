@@ -18,8 +18,11 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
+import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.bean.User;
+import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.FragmentController;
+import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.view.MoreWindow;
 
 import java.util.ArrayList;
@@ -27,6 +30,9 @@ import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, RongIM.UserInfoProvider {
 
@@ -50,9 +56,12 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         controller = FragmentController.getInstance(this, R.id.fl_content);
         controller.showFragments(0);
 
+
+
         initView();
 
     }
+
 
 
     private void initView() {

@@ -89,7 +89,11 @@
 
         <activity android:name=".activity.PhotoPreviewActivity" />
 
-        <activity android:name=".activity.WebActivity"/>
+        <activity android:name=".activity.WebActivity" />
+
+        <activity android:name=".activity.AddNoteActivity" />
+
+        <activity android:name=".activity.ModifyNoteActivity" />
 
 
         <activity

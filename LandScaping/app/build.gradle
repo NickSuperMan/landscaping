@@ -67,4 +67,5 @@ dependencies {
     compile project(':vitamio')
     compile project(':IMKit')
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
+    compile 'com.android.support:cardview-v7:23.3.0'
 }

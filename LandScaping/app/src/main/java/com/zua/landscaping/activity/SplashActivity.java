@@ -10,6 +10,7 @@ import android.util.Log;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Technical;
@@ -36,6 +37,7 @@ public class SplashActivity extends Activity {
     private List<Project> projects;
     private List<Device> deviceList;
     private List<Technical> technicalList;
+    private List<News> newsList;
 
 
     private Handler handler = new Handler() {
@@ -53,6 +55,7 @@ public class SplashActivity extends Activity {
 
         setContentView(R.layout.activity_layout_splash);
 
+        getNewsData();
         getProjectData();
         getVideoData();
         getPhotoData();
@@ -61,6 +64,25 @@ public class SplashActivity extends Activity {
 
         startActivity(new Intent(SplashActivity.this, LoginActivity.class));
         finish();
+    }
+
+    private void getNewsData() {
+        ConnService service = ServiceGenerator.createService(ConnService.class);
+        Call<List<News>> call = service.getAllNews();
+        call.enqueue(new Callback<List<News>>() {
+            @Override
+            public void onResponse(Call<List<News>> call, Response<List<News>> response) {
+                if (response.isSuccess()){
+                    newsList = response.body();
+                    App.setNewsList(newsList);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<News>> call, Throwable t) {
+
+            }
+        });
     }
 
     private void getTechnicalData() {

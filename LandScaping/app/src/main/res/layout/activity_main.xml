@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <FrameLayout
@@ -27,8 +28,8 @@
         <RadioButton
             android:id="@+id/home"
             style="@style/RadioButtonBottomTab"
-            android:drawableTop="@drawable/icon_home"
             android:checked="true"
+            android:drawableTop="@drawable/icon_home"
             android:text="@string/menu" />
 
         <RadioButton

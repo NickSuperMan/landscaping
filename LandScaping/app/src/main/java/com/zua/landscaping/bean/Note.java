@@ -1,24 +1,25 @@
 package com.zua.landscaping.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by roy on 4/26/16.
  */
-public class Note {
+public class Note implements Serializable{
 
     private int noteId;
     private int userId;
     private String noteTitle;
-    private String noteContet;
+    private String noteContent;
     private Date noteTime;
 
     public String getNoteContet() {
-        return noteContet;
+        return noteContent;
     }
 
     public void setNoteContet(String noteContet) {
-        this.noteContet = noteContet;
+        this.noteContent = noteContet;
     }
 
     public int getNoteId() {
@@ -56,7 +57,7 @@ public class Note {
     @Override
     public String toString() {
         return "Note{" +
-                "noteContet='" + noteContet + '\'' +
+                "noteContet='" + noteContent + '\'' +
                 ", noteId=" + noteId +
                 ", userId=" + userId +
                 ", noteTitle='" + noteTitle + '\'' +

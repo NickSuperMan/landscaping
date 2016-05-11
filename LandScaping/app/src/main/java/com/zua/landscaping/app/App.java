@@ -21,6 +21,8 @@ import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.News;
+import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Technical;
@@ -57,6 +59,8 @@ public class App extends Application implements BDLocationListener {
     private static Bitmap icon;
     private static List<Device> deviceList;
     private static List<Technical> technicalList;
+    private static List<Note> noteList;
+    private static List<News> newsList;
 
 
     @Override
@@ -320,5 +324,21 @@ public class App extends Application implements BDLocationListener {
 
     public static void setTechnicalList(List<Technical> technicalList) {
         App.technicalList = technicalList;
+    }
+
+    public static List<Note> getNoteList() {
+        return noteList;
+    }
+
+    public static void setNoteList(List<Note> noteList) {
+        App.noteList = noteList;
+    }
+
+    public static List<News> getNewsList() {
+        return newsList;
+    }
+
+    public static void setNewsList(List<News> newsList) {
+        App.newsList = newsList;
     }
 }

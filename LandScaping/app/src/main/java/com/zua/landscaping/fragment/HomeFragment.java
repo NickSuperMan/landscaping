@@ -1,5 +1,6 @@
 package com.zua.landscaping.fragment;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
@@ -37,6 +38,7 @@ import com.zua.landscaping.activity.NoteActivity;
 import com.zua.landscaping.activity.PersonalActivity;
 import com.zua.landscaping.activity.ProjectActivity;
 import com.zua.landscaping.activity.WeatherActivity;
+import com.zua.landscaping.activity.WebActivity;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.banner.SimpleImageBanner;
@@ -50,6 +52,10 @@ import com.zua.landscaping.utils.ToastUtils;
 import com.zua.landscaping.utils.ViewFindUtils;
 import com.zua.landscaping.view.RoundProgressBar;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 
 import retrofit2.Call;
@@ -61,7 +67,6 @@ import retrofit2.Response;
  * Created by roy on 16/4/18.
  */
 public class HomeFragment extends BaseFragment implements AdapterView.OnItemClickListener {
-
     private View view;
     private SimpleImageBanner sib;
     private RoundProgressBar progressBar;
@@ -100,6 +105,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         initEvent();
         initSlideMenu();
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getPeople();
     }
 
     private void getPeople() {
@@ -219,9 +230,29 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     private void initEvent() {
 
-        progressBar.setProgress(80);
+        Calendar cal1 = getCalendarFromDate("2016-04-18");
+        long startTime = cal1.getTimeInMillis();
+        Calendar cal2 = getCalendarFromDate("2017-04-19");
+        long endTime = cal2.getTimeInMillis();
+
+        Calendar cal3 = getCalendarFromDate(new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        long currentTime = cal3.getTimeInMillis();
+
+        int totalTime = (int) (endTime - startTime) / (24 * 60 * 60 * 1000);
+        int current = (int) (currentTime - startTime) / (24 * 60 * 60 * 1000);
+        Log.e("roy", "totalTime" + totalTime + "~~~~" + "current" + current);
+        float progress = (current / 365) * 100;
+        int time = 365 - current;
+
+        Log.e("roy", "progress" + progress + "~~~~" + "current" + current);
+
+        if (progress < 1) {
+            progressBar.setProgress(1);
+        } else {
+            progressBar.setProgress((int) progress);
+        }
         progressBar.setCricleProgressColor(Color.RED);
-        progressBar.setText("300");
+        progressBar.setText("" + time);
 
 
         sib.setSelectAnimClass(ZoomInEnter.class)
@@ -232,7 +263,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         sib.setOnItemClickL(new BaseBanner.OnItemClickL() {
             @Override
             public void onItemClick(int position) {
-                ToastUtils.showShort(getActivity(), "position--->" + position);
+                Intent intent = new Intent(getActivity(), WebActivity.class);
+                intent.putExtra("url", App.getNewsList().get(position).getNewsInformation());
+                intent.putExtra("name", App.getNewsList().get(position).getNewsName());
+                startActivity(intent);
             }
         });
 
@@ -253,4 +287,30 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     }
 
+    private Calendar getCalendarFromDate(final String date) {
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        try {
+            String[] array = date.split("-");
+            int[] arrayInt = new int[array.length];
+            for (int i = 0; i < array.length; i++) {
+                arrayInt[i] = Integer.parseInt(array[i]);
+                if (i == 0) {
+                    year = arrayInt[0];
+                } else if (i == 1) {
+                    month = arrayInt[1];
+                } else if (i == 2) {
+                    day = arrayInt[2];
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Calendar cal = Calendar.getInstance();
+        if (year > 0 && month >= 0 && day >= 0) {
+            cal.set(year, month, day);
+        }
+        return cal;
+    }
 }

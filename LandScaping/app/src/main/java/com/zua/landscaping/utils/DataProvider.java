@@ -1,10 +1,13 @@
 package com.zua.landscaping.utils;
 
 
-
+import com.zua.landscaping.app.App;
+import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.bean.BannerItem;
+import com.zua.landscaping.bean.News;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -28,11 +31,12 @@ public class DataProvider {
     };
 
     public static ArrayList<BannerItem> getList() {
+        List<News> newsList = App.getNewsList();
         ArrayList<BannerItem> list = new ArrayList<>();
-        for (int i = 0; i < urls.length; i++) {
+        for (int i = 0; i < newsList.size(); i++) {
             BannerItem item = new BannerItem();
-            item.imgUrl = urls[i];
-            item.title = titles[i];
+            item.imgUrl = Constant.BasePath+newsList.get(i).getNewsPicUrl();
+            item.title = newsList.get(i).getNewsName();
 
             list.add(item);
         }
