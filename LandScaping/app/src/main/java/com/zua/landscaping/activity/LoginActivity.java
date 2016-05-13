@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.flyco.animation.BounceEnter.BounceTopEnter;
+import com.flyco.animation.SlideExit.SlideBottomExit;
+import com.flyco.dialog.listener.OnBtnClickL;
+import com.flyco.dialog.widget.MaterialDialog;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.User;
@@ -40,7 +44,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
 
-        new TitleBuilder(this).setTitleText(getString(R.string.login)).build();
+//        new TitleBuilder(this).setTitleText(getString(R.string.login)).build();
 
 
         initView();

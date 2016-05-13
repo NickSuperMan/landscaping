@@ -69,4 +69,10 @@
     <string name="note_add">添加笔记</string>
     <string name="add_title">添加标题...</string>
     <string name="add_content">添加笔记...</string>
+    <string name="add_group">创建群组</string>
+    <string name="landing">正在加载...</string>
+    <string name="app_login_show">用户名</string>
+    <string name="app_login_password">密 码</string>
+    <string name="app_sign_in">登录</string>
+    <string name="logining">正在登录...</string>
 </resources>

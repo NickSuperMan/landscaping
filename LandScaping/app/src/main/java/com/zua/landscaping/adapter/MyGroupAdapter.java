@@ -48,7 +48,7 @@ public class MyGroupAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return datas.size();
+        return datas == null ? 0 : datas.size();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zua.landscaping.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,9 +18,7 @@ import com.zua.landscaping.bean.Technical;
 import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.ServiceGenerator;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +37,7 @@ public class SplashActivity extends Activity {
     private List<Device> deviceList;
     private List<Technical> technicalList;
     private List<News> newsList;
+    private ProgressDialog dialog;
 
 
     private Handler handler = new Handler() {
@@ -45,7 +45,16 @@ public class SplashActivity extends Activity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
 
+            Log.e("roy", "splash");
+            if (sceneVideo != null && scenesPhoto != null && projects != null &&
+                    deviceList != null && technicalList != null && newsList != null) {
 
+                if (dialog != null && dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+                startActivity(new Intent(SplashActivity.this, LoginActivity1.class));
+                finish();
+            }
         }
     };
 
@@ -62,8 +71,9 @@ public class SplashActivity extends Activity {
         getDeviceData();
         getTechnicalData();
 
-        startActivity(new Intent(SplashActivity.this, LoginActivity.class));
-        finish();
+        if (dialog == null)
+            dialog = ProgressDialog.show(this, null, getString(R.string.landing));
+
     }
 
     private void getNewsData() {
@@ -72,9 +82,12 @@ public class SplashActivity extends Activity {
         call.enqueue(new Callback<List<News>>() {
             @Override
             public void onResponse(Call<List<News>> call, Response<List<News>> response) {
-                if (response.isSuccess()){
+                if (response.isSuccess()) {
                     newsList = response.body();
                     App.setNewsList(newsList);
+                    Message message = new Message();
+                    message.obj = 1;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -93,8 +106,10 @@ public class SplashActivity extends Activity {
             public void onResponse(Call<List<Technical>> call, Response<List<Technical>> response) {
                 if (response.isSuccess()) {
                     technicalList = response.body();
-                    Log.e("roy", technicalList.toString());
                     App.setTechnicalList(technicalList);
+                    Message message = new Message();
+                    message.obj = 2;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -115,8 +130,9 @@ public class SplashActivity extends Activity {
                 if (response.isSuccess()) {
                     sceneVideo = response.body();
                     App.setSceneVideoList(sceneVideo);
-                    Log.e("roy", sceneVideo.toString() + "");
-
+                    Message message = new Message();
+                    message.obj = 3;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -138,8 +154,9 @@ public class SplashActivity extends Activity {
                 if (response.isSuccess()) {
                     scenesPhoto = response.body();
                     App.setScenePhotoList(scenesPhoto);
-                    Log.e("roy", scenesPhoto.toString() + "~~");
-
+                    Message message = new Message();
+                    message.obj = 4;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -162,8 +179,9 @@ public class SplashActivity extends Activity {
                 if (response.isSuccess()) {
                     projects = response.body();
                     App.setProjectList(projects);
-                    Log.e("roy", projects.toString() + "~~");
-
+                    Message message = new Message();
+                    message.obj = 5;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -184,6 +202,9 @@ public class SplashActivity extends Activity {
                 if (response.isSuccess()) {
                     deviceList = response.body();
                     App.setDeviceList(deviceList);
+                    Message message = new Message();
+                    message.obj = 6;
+                    handler.sendMessage(message);
                 }
             }
 
@@ -194,5 +215,11 @@ public class SplashActivity extends Activity {
         });
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (dialog != null) {
+            dialog.dismiss();
+        }
+    }
 }

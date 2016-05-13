@@ -3,7 +3,7 @@
     android:id="@+id/rl_titlebar"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@color/md_blue_grey_100"
+    android:background="@color/bg_agray"
     android:fitsSystemWindows="true"
     android:orientation="horizontal" >
 
@@ -29,6 +29,7 @@
     <TextView
         android:id="@+id/titlebar_tv"
         style="@style/TextViewTitle"
+        android:textColor="#000000"
         android:marqueeRepeatLimit="marquee_forever"
         android:ellipsize="marquee"
         android:layout_centerInParent="true"

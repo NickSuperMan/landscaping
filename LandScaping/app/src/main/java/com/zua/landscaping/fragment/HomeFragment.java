@@ -1,9 +1,7 @@
 package com.zua.landscaping.fragment;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -28,12 +26,10 @@ import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
-import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zua.landscaping.R;
-import com.zua.landscaping.activity.ApplyLeaveActivity;
 import com.zua.landscaping.activity.LeaveStatusActivity;
 import com.zua.landscaping.activity.LoginActivity;
+import com.zua.landscaping.activity.LoginActivity1;
 import com.zua.landscaping.activity.NoteActivity;
 import com.zua.landscaping.activity.PersonalActivity;
 import com.zua.landscaping.activity.ProjectActivity;
@@ -52,7 +48,6 @@ import com.zua.landscaping.utils.ToastUtils;
 import com.zua.landscaping.utils.ViewFindUtils;
 import com.zua.landscaping.view.RoundProgressBar;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -153,7 +148,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
                     public boolean onProfileChanged(View view, IProfile profile, boolean current) {
-//                        ToastUtils.showShort(getActivity(), "click....");
+
                         if (App.isLogin()) {
                             intent2Activity(PersonalActivity.class);
                         } else {
@@ -189,11 +184,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
-                        ToastUtils.showShort(getActivity(), "position------>" + position);
                         switch (position) {
                             case -1:
                                 App.setIsLogin(false);
-                                intent2Activity(LoginActivity.class);
+                                intent2Activity(LoginActivity1.class);
                                 activity.finish();
                                 break;
                             case 1:
@@ -243,8 +237,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         Log.e("roy", "totalTime" + totalTime + "~~~~" + "current" + current);
         float progress = (current / 365) * 100;
         int time = 365 - current;
-
-        Log.e("roy", "progress" + progress + "~~~~" + "current" + current);
 
         if (progress < 1) {
             progressBar.setProgress(1);

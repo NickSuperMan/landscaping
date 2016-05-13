@@ -5,10 +5,18 @@
     android:gravity="center_horizontal"
     android:orientation="vertical">
 
-    <ImageView
+    <include layout="@layout/include_titile" />
 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@mipmap/ic_launcher" />
+    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_launcher" />
+
+    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+
 
 </LinearLayout>

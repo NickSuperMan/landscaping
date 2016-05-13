@@ -48,18 +48,19 @@ public class NoteActivity extends Activity implements AdapterView.OnItemClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_note);
 
-        getNoteDatas();
+
+        if (App.getNoteList() == null) {
+            getNoteDatas();
+        } else {
+            noteList = App.getNoteList();
+            initView();
+        }
+
 
         new TitleBuilder(this).setTitleText(getString(R.string.note)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        }).setRightImage(R.drawable.icon_add).setRightOnclickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
             }
         }).build();
 
@@ -79,8 +80,6 @@ public class NoteActivity extends Activity implements AdapterView.OnItemClickLis
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
 
                 startActivity(new Intent(NoteActivity.this, AddNoteActivity.class));
             }
@@ -104,6 +103,7 @@ public class NoteActivity extends Activity implements AdapterView.OnItemClickLis
             public void onResponse(Call<List<Note>> call, Response<List<Note>> response) {
                 if (response.isSuccess()) {
                     noteList = response.body();
+                    App.setNoteList(noteList);
                     initView();
                 }
             }
@@ -156,7 +156,7 @@ public class NoteActivity extends Activity implements AdapterView.OnItemClickLis
 
     private void deleteNote(int position) {
         ConnService service = ServiceGenerator.createService(ConnService.class);
-        Call<Code> call = service.deleteNote(noteList.get(position).getNoteId() + "","delete");
+        Call<Code> call = service.deleteNote(noteList.get(position).getNoteId() + "", "delete");
         call.enqueue(new Callback<Code>() {
             @Override
             public void onResponse(Call<Code> call, Response<Code> response) {

@@ -44,7 +44,7 @@ public class ScenePhotoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return scenePhotoList.size() == 0 ? 0 : scenePhotoList.size();
+        return scenePhotoList == null ? 0 : scenePhotoList.size();
     }
 
     @Override

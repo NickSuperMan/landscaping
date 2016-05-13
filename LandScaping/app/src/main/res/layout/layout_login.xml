@@ -4,20 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_titile" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24sp"
+            android:textColor="#000000"
+            android:text="绿化进度上报"/>
+
         <ImageView
+            android:layout_marginTop="40dp"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/icon_me" />
+            android:src="@drawable/icon" />
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center">
@@ -32,6 +39,7 @@
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:singleLine="true" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -53,6 +61,8 @@
         </LinearLayout>
 
         <Button
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:id="@+id/user_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

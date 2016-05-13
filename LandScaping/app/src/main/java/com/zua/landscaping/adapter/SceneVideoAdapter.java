@@ -31,7 +31,7 @@ public class SceneVideoAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return sceneVideoList.size() == 0 ? 0 : sceneVideoList.size();
+        return sceneVideoList == null ? 0 : sceneVideoList.size();
     }
 
     @Override
@@ -54,7 +54,7 @@ public class SceneVideoAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.textView = (TextView) convertView.findViewById(R.id.item_video_name);
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

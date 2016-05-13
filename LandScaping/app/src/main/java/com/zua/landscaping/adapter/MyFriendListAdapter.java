@@ -42,7 +42,7 @@ public class MyFriendListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return friends.size();
+        return friends == null ? 0 : friends.size();
     }
 
     @Override

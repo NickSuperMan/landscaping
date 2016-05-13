@@ -32,7 +32,7 @@ public class ApplyLeaveStatusAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return data.size() == 0 ? 0 : data.size();
+        return data == null ? 0 : data.size();
     }
 
     @Override

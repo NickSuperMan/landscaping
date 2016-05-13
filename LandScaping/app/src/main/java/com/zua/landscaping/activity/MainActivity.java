@@ -117,6 +117,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     @Override
     public void onBackPressed() {
+
         final MaterialDialog dialog = new MaterialDialog(this);
         dialog.isTitleShow(false)
                 .content("是否确定退出当前App?")
@@ -136,7 +137,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
             public void onBtnClick() {
                 dialog.superDismiss();
                 finish();
-                System.exit(0);
             }
         });
     }

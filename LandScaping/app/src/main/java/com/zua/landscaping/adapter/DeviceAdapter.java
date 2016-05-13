@@ -42,7 +42,7 @@ public class DeviceAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return deviceList.size() == 0 ? 0 : deviceList.size();
+        return deviceList == null ? 0 : deviceList.size();
     }
 
     @Override

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.zua.landscaping.R;
 import com.zua.landscaping.adapter.MyGroupAdapter;
+import com.zua.landscaping.utils.TitleBuilder;
 
 import java.util.List;
 
@@ -20,10 +21,9 @@ import io.rong.imkit.RongIM;
 /**
  * Created by roy on 4/26/16.
  */
-public class AddGroupActivity extends Activity implements View.OnClickListener {
+public class AddGroupActivity extends Activity {
 
     private ListView listView;
-    private TextView back, select;
     private MyGroupAdapter mAdapter;
 
 
@@ -34,31 +34,23 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
         setContentView(R.layout.layout_add_group);
 
         initView();
+
+        initTitle();
     }
 
-    private void initView() {
-        listView = (ListView) findViewById(R.id.friend_list_add);
-        back = (TextView) findViewById(R.id.back);
-        select = (TextView) findViewById(R.id.select);
-
-        back.setOnClickListener(this);
-        select.setOnClickListener(this);
-
-        mAdapter = new MyGroupAdapter(this);
-        listView.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.back:
+    private void initTitle() {
+        new TitleBuilder(this).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 finish();
-                break;
-            case R.id.select:
+            }
+        }).setTitleText(getString(R.string.add_group)).setRightImage(R.drawable.icon_add).setRightOnclickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 final List<String> list = mAdapter.checkedList();
-                Toast.makeText(this, list.toString(), Toast.LENGTH_SHORT).show();
-                final EditText text = new EditText(this);
-                AlertDialog.Builder builder = new AlertDialog.Builder(this)
+
+                final EditText text = new EditText(AddGroupActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(AddGroupActivity.this)
                         .setTitle("请输入讨论组名称：")
                         .setView(text)
                         .setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -76,7 +68,16 @@ public class AddGroupActivity extends Activity implements View.OnClickListener {
                             }
                         });
                 builder.show();
-                break;
-        }
+            }
+        }).build();
     }
+
+    private void initView() {
+        listView = (ListView) findViewById(R.id.friend_list_add);
+
+
+        mAdapter = new MyGroupAdapter(this);
+        listView.setAdapter(mAdapter);
+    }
+
 }
