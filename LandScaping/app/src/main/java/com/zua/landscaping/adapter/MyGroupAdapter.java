@@ -81,7 +81,7 @@ public class MyGroupAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        imageLoader.displayImage(Constant.PicPath + datas.get(position).getUserPicUrl(), viewHolder.imageView, options);
+        imageLoader.displayImage(Constant.BasePath + datas.get(position).getUserPicUrl(), viewHolder.imageView, options);
 
         viewHolder.textView.setText(datas.get(position).getUserName());
         viewHolder.checkBox.setTag(position);

@@ -82,7 +82,7 @@ public class App extends Application implements BDLocationListener {
                 .cacheOnDisk(true)
                 .build();
 
-        imageLoader.loadImage(Constant.PicPath + getUser().getUserPicUrl(), options, new ImageLoadingListener() {
+        imageLoader.loadImage(Constant.BasePath + getUser().getUserPicUrl(), options, new ImageLoadingListener() {
             @Override
             public void onLoadingStarted(String imageUri, View view) {
 
@@ -308,6 +308,10 @@ public class App extends Application implements BDLocationListener {
 
     public static Bitmap getIcon() {
         return icon;
+    }
+
+    public static void setIcon(Bitmap icon) {
+        App.icon = icon;
     }
 
     public static List<Device> getDeviceList() {

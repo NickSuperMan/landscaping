@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:cardBackgroundColor="#dedede"
+    app:cardCornerRadius="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:weightSum="10">
+
+            <TextView
+                android:id="@+id/technical_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="8"
+                android:text="西宁市庭院绿化景观提升工作铺开"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/technical_time"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="5dp"
+                android:layout_weight="2"
+                android:text="2016-04-28"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/technical_sign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:background="#dedede"
+            android:text="政策法规"
+            android:textColor="@color/accent"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/technical_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:text="asdsfsfdafasdfafasfaffsfsdfsdfsfsfsdfsfsdfsdfsadfsdfsfdsf"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

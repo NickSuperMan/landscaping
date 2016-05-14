@@ -97,6 +97,14 @@
 
         <activity android:name=".activity.ModifyNoteActivity" />
 
+        <activity android:name=".activity.ModifySignActivity" />
+
+        <activity android:name=".activity.ModifyAgeActivity" />
+
+        <activity android:name=".activity.ModifyTelActivity" />
+
+        <activity android:name=".activity.OpinionActivity" />
+
 
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"

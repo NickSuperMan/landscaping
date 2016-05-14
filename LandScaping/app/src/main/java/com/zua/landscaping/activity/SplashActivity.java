@@ -47,7 +47,7 @@ public class SplashActivity extends Activity {
 
             Log.e("roy", "splash");
             if (sceneVideo != null && scenesPhoto != null && projects != null &&
-                    deviceList != null && technicalList != null && newsList != null) {
+                    deviceList != null && technicalList != null && newsList != null && sceneOpinion != null) {
 
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
@@ -68,13 +68,16 @@ public class SplashActivity extends Activity {
         getProjectData();
         getVideoData();
         getPhotoData();
+        getOpinionData();
         getDeviceData();
         getTechnicalData();
+
 
         if (dialog == null)
             dialog = ProgressDialog.show(this, null, getString(R.string.landing));
 
     }
+
 
     private void getNewsData() {
         ConnService service = ServiceGenerator.createService(ConnService.class);
@@ -122,7 +125,7 @@ public class SplashActivity extends Activity {
 
     private void getVideoData() {
         ConnService service = ServiceGenerator.createService(ConnService.class);
-        Call<List<Scene>> video = service.getAllScene("1", "1");
+        Call<List<Scene>> video = service.getAllScene("query", "1", "1");
         Log.e("roy", "getPhotoScene");
         video.enqueue(new Callback<List<Scene>>() {
             @Override
@@ -147,7 +150,7 @@ public class SplashActivity extends Activity {
     private void getPhotoData() {
         ConnService service = ServiceGenerator.createService(ConnService.class);
 
-        Call<List<Scene>> photo = service.getAllScene("1", "0");
+        Call<List<Scene>> photo = service.getAllScene("query", "1", "0");
         photo.enqueue(new Callback<List<Scene>>() {
             @Override
             public void onResponse(Call<List<Scene>> call, Response<List<Scene>> response) {
@@ -212,6 +215,30 @@ public class SplashActivity extends Activity {
             public void onFailure(Call<List<Device>> call, Throwable t) {
 
             }
+        });
+    }
+
+    private void getOpinionData() {
+        ConnService service = ServiceGenerator.createService(ConnService.class);
+        Call<List<Scene>> video = service.getAllScene("query", "1", "3");
+        Log.e("roy", "getPhotoScene");
+        video.enqueue(new Callback<List<Scene>>() {
+            @Override
+            public void onResponse(Call<List<Scene>> call, Response<List<Scene>> response) {
+                if (response.isSuccess()) {
+                    sceneOpinion = response.body();
+                    App.setSceneOpinionList(sceneOpinion);
+                    Message message = new Message();
+                    message.obj = 7;
+                    handler.sendMessage(message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Scene>> call, Throwable t) {
+                Log.e("roy", "~~~~~~~" + t.toString());
+            }
+
         });
     }
 

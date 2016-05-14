@@ -150,7 +150,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         for (User user : data) {
             if ((user.getUserId() + "").equals(s)) {
                 Log.e("roy", "~~~~" + user.getUserPicUrl());
-                return new UserInfo(user.getUserId() + "", user.getUserName(), Uri.parse(Constant.PicPath + user.getUserPicUrl()));
+                return new UserInfo(user.getUserId() + "", user.getUserName(), Uri.parse(Constant.BasePath + user.getUserPicUrl()));
             }
         }
 

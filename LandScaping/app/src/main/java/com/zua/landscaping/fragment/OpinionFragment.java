@@ -5,8 +5,14 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 import com.zua.landscaping.R;
+import com.zua.landscaping.adapter.OpinionAdapter;
+import com.zua.landscaping.app.App;
+import com.zua.landscaping.bean.Scene;
+
+import java.util.List;
 
 
 /**
@@ -15,6 +21,9 @@ import com.zua.landscaping.R;
 public class OpinionFragment extends BaseFragment {
 
     private View view;
+    private ListView listView;
+    private OpinionAdapter adapter;
+    private List<Scene> datas;
 
     @Nullable
     @Override
@@ -22,7 +31,16 @@ public class OpinionFragment extends BaseFragment {
 
         view = View.inflate(activity, R.layout.layout_scene_opinion, null);
 
+        initView();
 
         return view;
+    }
+
+
+    private void initView() {
+        datas = App.getSceneOpinionList();
+        listView = (ListView) view.findViewById(R.id.opinion_listview);
+        adapter = new OpinionAdapter(getActivity(), datas);
+        listView.setAdapter(adapter);
     }
 }

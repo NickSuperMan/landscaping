@@ -76,7 +76,7 @@ public class ScenePhotoAdapter extends BaseAdapter {
         }
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        imageLoader.displayImage(Constant.PhotoPath + scenePhotoList.get(position).getScenePicUrl(), holder.imageView, options);
+        imageLoader.displayImage(Constant.BasePath + scenePhotoList.get(position).getScenePicUrl(), holder.imageView, options);
         holder.textView.setText(scenePhotoList.get(position).getSceneDescription());
         holder.tv_position.setText(scenePhotoList.get(position).getScenePosition());
         holder.tv_time.setText(format.format(scenePhotoList.get(position).getSceneTime()));

@@ -71,7 +71,7 @@ public class MyFriendListAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        imageLoader.displayImage(Constant.PicPath + friends.get(position).getUserPicUrl(), holder.imageView, options);
+        imageLoader.displayImage(Constant.BasePath + friends.get(position).getUserPicUrl(), holder.imageView, options);
 
         holder.textView.setText(friends.get(position).getUserName() + "");
 

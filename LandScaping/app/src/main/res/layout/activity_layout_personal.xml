@@ -7,16 +7,13 @@
 
     <include layout="@layout/include_titile" />
 
-    <com.github.ksoichiro.android.observablescrollview.ObservableScrollView
+    <ListView
+        android:id="@+id/person_listView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@mipmap/ic_launcher" />
-
-    </com.github.ksoichiro.android.observablescrollview.ObservableScrollView>
+        android:layout_height="match_parent"
+        android:layout_marginTop="5dp"
+        android:divider="@null"
+        android:dividerHeight="8dp" />
 
 
 </LinearLayout>

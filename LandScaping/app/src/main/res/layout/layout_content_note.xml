@@ -4,16 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <include layout="@layout/include_titile" />
 
     <ListView
-        android:id="@+id/opinion_listview"
+        android:id="@+id/note_recycleView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
         android:divider="@null"
-        android:dividerHeight="8dp"
-        android:fadeScrollbars="true"
+        android:dividerHeight="10px"
         android:fadingEdge="none"/>
+
 
 </LinearLayout>

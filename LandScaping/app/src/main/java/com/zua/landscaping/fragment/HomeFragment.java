@@ -31,6 +31,7 @@ import com.zua.landscaping.activity.LeaveStatusActivity;
 import com.zua.landscaping.activity.LoginActivity;
 import com.zua.landscaping.activity.LoginActivity1;
 import com.zua.landscaping.activity.NoteActivity;
+import com.zua.landscaping.activity.OpinionActivity;
 import com.zua.landscaping.activity.PersonalActivity;
 import com.zua.landscaping.activity.ProjectActivity;
 import com.zua.landscaping.activity.WeatherActivity;
@@ -105,7 +106,10 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     @Override
     public void onResume() {
         super.onResume();
-        getPeople();
+        if (sign != null) {
+            getPeople();
+            initSlideMenu();
+        }
     }
 
     private void getPeople() {
@@ -132,16 +136,15 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         });
     }
 
-    private void initSlideMenu() {
 
-        String url = Constant.PicPath + App.getUser().getUserPicUrl();
+    private void initSlideMenu() {
 
 
         AccountHeader header = new AccountHeaderBuilder()
                 .withActivity(getActivity())
                 .withHeaderBackground(R.drawable.fab_label_background)
 
-                .addProfiles(new ProfileDrawerItem().withIcon(App.getIcon()).withName(App.getUser().getUserName()).withEmail(App.getUser().getUserTel()))
+                .addProfiles(new ProfileDrawerItem().withIcon(App.getIcon()).withName(App.getUser().getUserSign()).withEmail(App.getUser().getUserTel()))
                 .withSelectionListEnabled(false)
 //                .withSelectionSecondLineShown(false)
 //                .withSelectionFirstLineShown(false)
@@ -166,6 +169,9 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         SecondaryDrawerItem item2 = new SecondaryDrawerItem()
                 .withIcon(R.drawable.icon_home)
                 .withName(R.string.note);
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem()
+                .withIcon(R.drawable.icon_home)
+                .withName(R.string.opinion);
 
         result = new DrawerBuilder()
                 .withActivity(getActivity())
@@ -174,6 +180,8 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                         item1,
                         new DividerDrawerItem(),
                         item2,
+                        new DividerDrawerItem(),
+                        item3,
                         new DividerDrawerItem()
                 )
                 .addStickyDrawerItems(new PrimaryDrawerItem()
@@ -184,6 +192,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+//                        ToastUtils.showShort(getActivity(),position+"");
                         switch (position) {
                             case -1:
                                 App.setIsLogin(false);
@@ -192,6 +201,9 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                                 break;
                             case 1:
                                 intent2Activity(LeaveStatusActivity.class);
+                                break;
+                            case 5:
+                                intent2Activity(OpinionActivity.class);
                                 break;
                             case 3:
                                 intent2Activity(NoteActivity.class);

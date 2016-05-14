@@ -52,8 +52,14 @@ public interface ConnService {
 
     @POST("SceneServlet")
     Call<List<Scene>> getAllScene(
+            @Query("method") String method,
             @Query("pageNum") String pageNum,
             @Query("status") String status
+    );
+
+    @POST("SceneServlet")
+    Call<Code> uploadOpinion(
+            @QueryMap HashMap<String, String> map
     );
 
     @POST("SignServlet")
@@ -115,6 +121,11 @@ public interface ConnService {
     Call<Code> deleteNote(
             @Query("noteId") String noteId,
             @Query("method") String method
+    );
+
+    @POST("UserServlet")
+    Call<Code> updateUser(
+            @QueryMap HashMap<String, String> map
     );
 }
 

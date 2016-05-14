@@ -10,6 +10,7 @@ public class User {
 	private String userTel;
 	private String userAge;
 	private String userPicUrl;
+	private String userSign;
 	private Result result;
 	private List<User> friends;
 
@@ -61,6 +62,14 @@ public class User {
 		this.userPicUrl = userPicUrl;
 	}
 
+	public String getUserSign() {
+		return userSign;
+	}
+
+	public void setUserSign(String userSign) {
+		this.userSign = userSign;
+	}
+
 	public Result getResult() {
 		return result;
 	}
@@ -82,7 +91,9 @@ public class User {
 		return "User [userId=" + userId + ", userName=" + userName
 				+ ", userPassword=" + userPassword + ", userTel=" + userTel
 				+ ", userAge=" + userAge + ", userPicUrl=" + userPicUrl
-				+ ", result=" + result + ", friends=" + friends + "]";
+				+ ", userSign=" + userSign + ", result=" + result
+				+ ", friends=" + friends + "]";
 	}
+
 
 }

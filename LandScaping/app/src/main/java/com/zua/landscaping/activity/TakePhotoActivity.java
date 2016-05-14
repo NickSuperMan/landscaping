@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
+import com.zua.landscaping.utils.BitmapUtils;
 import com.zua.landscaping.utils.TitleBuilder;
 import com.zua.landscaping.utils.ToastUtils;
 
@@ -66,7 +67,7 @@ public class TakePhotoActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.photo_preview);
         editText = (EditText) findViewById(R.id.photo_description);
 
-        file = getImageFile();
+        file = BitmapUtils.getImageFile();
 
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
@@ -128,7 +129,7 @@ public class TakePhotoActivity extends Activity {
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }
-                deleteDirectory();
+                BitmapUtils.deleteDirectory();
                 finish();
 
             }
@@ -149,52 +150,6 @@ public class TakePhotoActivity extends Activity {
             }
         });
 
-    }
-
-
-    private void deleteDirectory() {
-        File imageFileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "LandScaping" + File.separator + "image");
-        if (imageFileDir.exists() && imageFileDir.isDirectory()) {
-            File[] files = imageFileDir.listFiles();
-            for (int i = 0; i < files.length; i++) {
-                if (files[i].isFile()) {
-                    File imageFile = new File(files[i].getAbsolutePath());
-                    if (imageFile.isFile() && imageFile.exists()) {
-                        imageFile.delete();
-                    }
-                }
-            }
-            imageFileDir.delete();
-        }
-    }
-
-
-    public File getImageFile() {
-
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
-        String fileName = dateFormat.format(date);
-        String rootPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "LandScaping" + File.separator + "image";
-        File rootFile = new File(rootPath);
-        if (!rootFile.exists()) {
-            rootFile.mkdirs();
-        }
-        File newFile = new File(rootPath + File.separator + fileName + ".jpg");
-        return newFile;
-
-    }
-
-    public static BitmapDrawable zoomBitmap(Resources res, Bitmap bitmap, int newWidth, int newHeight) {
-        int oldWidth = bitmap.getWidth();
-        int oldHeight = bitmap.getHeight();
-        Matrix matrix = new Matrix();
-        float scaleWidht = ((float) newWidth / oldWidth);
-        float scaleHeight = ((float) newHeight / oldHeight);
-        matrix.postScale(scaleWidht, scaleHeight);
-
-        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, oldWidth, oldHeight,
-                matrix, true);
-        return new BitmapDrawable(res, newbmp);
     }
 
     @Override
