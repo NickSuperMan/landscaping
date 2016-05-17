@@ -47,7 +47,7 @@ public class SplashActivity extends Activity {
 
             Log.e("roy", "splash");
             if (sceneVideo != null && scenesPhoto != null && projects != null &&
-                    deviceList != null && technicalList != null && newsList != null && sceneOpinion != null) {
+                    deviceList != null && technicalList != null && newsList != null && sceneOpinion != null && sceneSafe != null) {
 
                 if (dialog != null && dialog.isShowing()) {
                     dialog.dismiss();
@@ -68,6 +68,7 @@ public class SplashActivity extends Activity {
         getProjectData();
         getVideoData();
         getPhotoData();
+        getSafeData();
         getOpinionData();
         getDeviceData();
         getTechnicalData();
@@ -221,7 +222,7 @@ public class SplashActivity extends Activity {
     private void getOpinionData() {
         ConnService service = ServiceGenerator.createService(ConnService.class);
         Call<List<Scene>> video = service.getAllScene("query", "1", "3");
-        Log.e("roy", "getPhotoScene");
+
         video.enqueue(new Callback<List<Scene>>() {
             @Override
             public void onResponse(Call<List<Scene>> call, Response<List<Scene>> response) {
@@ -241,6 +242,32 @@ public class SplashActivity extends Activity {
 
         });
     }
+
+
+    private void getSafeData() {
+        ConnService service = ServiceGenerator.createService(ConnService.class);
+        Call<List<Scene>> safe = service.getAllScene("query", "1", "2");
+
+        safe.enqueue(new Callback<List<Scene>>() {
+            @Override
+            public void onResponse(Call<List<Scene>> call, Response<List<Scene>> response) {
+                if (response.isSuccess()) {
+                    sceneSafe = response.body();
+                    App.setSceneSafeList(sceneSafe);
+                    Message message = new Message();
+                    message.obj = 8;
+                    handler.sendMessage(message);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Scene>> call, Throwable t) {
+                Log.e("roy", "~~~~~~~" + t.toString());
+            }
+
+        });
+    }
+
 
     @Override
     protected void onDestroy() {

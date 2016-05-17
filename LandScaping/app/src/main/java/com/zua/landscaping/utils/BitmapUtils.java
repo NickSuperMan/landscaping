@@ -7,17 +7,71 @@ import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Environment;
 
+import com.zua.landscaping.bean.ImageItem;
+
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  * Created by roy on 16/5/13.
  */
 public class BitmapUtils {
+
+    public static String SDPATH = Environment.getExternalStorageDirectory()
+            + "/LandScaping/";
+
+    public static int max = 0;
+
+    public static ArrayList<ImageItem> tempSelectBitmap = new ArrayList<>();   //选择的图片的临时列表
+
+    public static Bitmap revitionImageSize(String path) throws IOException {
+        BufferedInputStream in = new BufferedInputStream(new FileInputStream(
+                new File(path)));
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeStream(in, null, options);
+        in.close();
+        int i = 0;
+        Bitmap bitmap = null;
+        while (true) {
+            if ((options.outWidth >> i <= 1000)
+                    && (options.outHeight >> i <= 1000)) {
+                in = new BufferedInputStream(
+                        new FileInputStream(new File(path)));
+                options.inSampleSize = (int) Math.pow(2.0D, i);
+                options.inJustDecodeBounds = false;
+                bitmap = BitmapFactory.decodeStream(in, null, options);
+                break;
+            }
+            i += 1;
+        }
+        return bitmap;
+    }
+
+
+    public static void saveBitmap(Bitmap bm, File f) {
+        try {
+            if (f.exists()) {
+                f.delete();
+            }
+            FileOutputStream out = new FileOutputStream(f);
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public static void deleteDirectory() {
@@ -74,13 +128,13 @@ public class BitmapUtils {
         // bitmap.compress(Bitmap.CompressFormat.PNG, 50, baos);//the
         // compression wont work as PNG which is lossless, will ignore the
         // quality setting.
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] b = baos.toByteArray();
         double mid = b.length / 1024;
         while (mid > maxSize) {
             bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
             baos = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, baos);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
             b = baos.toByteArray();
             mid = b.length / 1024;
         }

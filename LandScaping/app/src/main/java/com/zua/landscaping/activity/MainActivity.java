@@ -56,12 +56,8 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         controller = FragmentController.getInstance(this, R.id.fl_content);
         controller.showFragments(0);
 
-
-
         initView();
-
     }
-
 
 
     private void initView() {
@@ -95,7 +91,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
     @Override
     public void onClick(View view) {
-        Toast.makeText(this, "add", Toast.LENGTH_SHORT).show();
+
         if (null == moreWindow) {
             moreWindow = new MoreWindow(this);
             moreWindow.init();

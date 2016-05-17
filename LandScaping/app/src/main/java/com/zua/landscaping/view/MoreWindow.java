@@ -31,6 +31,7 @@ import com.zua.landscaping.R;
 import com.zua.landscaping.activity.DeviceListActivity;
 import com.zua.landscaping.activity.ProcessUpdateActivity;
 import com.zua.landscaping.activity.RecordVideoActivity;
+import com.zua.landscaping.activity.SafeUploadActivity;
 import com.zua.landscaping.activity.TakePhotoActivity;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Code;
@@ -250,34 +251,43 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
             case R.id.upload_photo:
 
                 mContext.startActivity(new Intent(mContext, TakePhotoActivity.class));
-                closeAnimation(relative_layout);
-
+                clearPopup();
                 break;
             case R.id.upload_video:
 
                 mContext.startActivity(new Intent(mContext, RecordVideoActivity.class));
-                closeAnimation(relative_layout);
+                clearPopup();
 
                 break;
             case R.id.take_sign:
                 signUpload();
-                closeAnimation(relative_layout);
+                clearPopup();
                 break;
             case R.id.upload_process:
                 mContext.startActivity(new Intent(mContext, ProcessUpdateActivity.class));
-                closeAnimation(relative_layout);
+                clearPopup();
                 break;
             case R.id.upload_danger:
-
+                mContext.startActivity(new Intent(mContext, SafeUploadActivity.class));
+                clearPopup();
                 break;
             case R.id.take_device:
                 mContext.startActivity(new Intent(mContext, DeviceListActivity.class));
-                closeAnimation(relative_layout);
+                clearPopup();
                 break;
 
             default:
                 break;
         }
+    }
+
+    private void clearPopup() {
+        try {
+            Thread.sleep(800);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        closeAnimation(relative_layout);
     }
 
     private void signUpload() {
@@ -294,7 +304,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
             public void onResponse(Call<Code> call, Response<Code> response) {
                 if (response.isSuccess()) {
                     Code body = response.body();
-                    Log.e("roy", response.body().toString());
+
                     if (body.getCode() == 1) {
                         ToastUtils.showShort(mContext, body.getMessage());
                     } else {

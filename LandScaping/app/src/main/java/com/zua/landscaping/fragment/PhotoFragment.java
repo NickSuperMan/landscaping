@@ -13,7 +13,11 @@ import com.zua.landscaping.R;
 import com.zua.landscaping.activity.PhotoPreviewActivity;
 import com.zua.landscaping.adapter.ScenePhotoAdapter;
 import com.zua.landscaping.app.App;
+import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.utils.ToastUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -24,6 +28,7 @@ public class PhotoFragment extends BaseFragment implements AdapterView.OnItemCli
     private View view;
     private ListView listView;
     private ScenePhotoAdapter adapter;
+    private List<Scene> scenePhotoList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -31,8 +36,9 @@ public class PhotoFragment extends BaseFragment implements AdapterView.OnItemCli
 
         view = View.inflate(activity, R.layout.layout_scene_photo, null);
 
+        scenePhotoList = App.getScenePhotoList();
         listView = (ListView) view.findViewById(R.id.photo_listView);
-        adapter = new ScenePhotoAdapter(getActivity());
+        adapter = new ScenePhotoAdapter(getActivity(),scenePhotoList);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
@@ -41,7 +47,7 @@ public class PhotoFragment extends BaseFragment implements AdapterView.OnItemCli
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String path = App.getScenePhotoList().get(position).getScenePicUrl();
+        String path = scenePhotoList.get(position).getScenePicUrl();
         String ext = path.substring(path.lastIndexOf("."));
         String realPath = path.substring(0, path.lastIndexOf("_")) + ext;
         Intent intent = new Intent(getActivity(), PhotoPreviewActivity.class);

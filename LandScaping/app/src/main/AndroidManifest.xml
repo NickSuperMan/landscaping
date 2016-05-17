@@ -105,6 +105,11 @@
 
         <activity android:name=".activity.OpinionActivity" />
 
+        <activity android:name=".activity.SafeUploadActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+
+        <activity android:name=".activity.PhotoViewPagerPreview"/>
 
         <activity
             android:name="io.vov.vitamio.activity.InitActivity"

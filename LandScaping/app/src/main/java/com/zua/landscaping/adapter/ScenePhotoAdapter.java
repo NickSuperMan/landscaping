@@ -26,14 +26,14 @@ import java.util.List;
 public class ScenePhotoAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private List<Scene> scenePhotoList = new ArrayList<>();
+    private List<Scene> scenePhotoList;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
 
-    public ScenePhotoAdapter(Context context) {
+    public ScenePhotoAdapter(Context context, List<Scene> datas) {
 
         inflater = LayoutInflater.from(context);
-        scenePhotoList = App.getScenePhotoList();
+        this.scenePhotoList = datas;
 
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
@@ -75,8 +75,9 @@ public class ScenePhotoAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String photoPath = scenePhotoList.get(position).getScenePicUrl().split("jpg")[0]+"jpg";
 
-        imageLoader.displayImage(Constant.BasePath + scenePhotoList.get(position).getScenePicUrl(), holder.imageView, options);
+        imageLoader.displayImage(Constant.BasePath + photoPath, holder.imageView, options);
         holder.textView.setText(scenePhotoList.get(position).getSceneDescription());
         holder.tv_position.setText(scenePhotoList.get(position).getScenePosition());
         holder.tv_time.setText(format.format(scenePhotoList.get(position).getSceneTime()));

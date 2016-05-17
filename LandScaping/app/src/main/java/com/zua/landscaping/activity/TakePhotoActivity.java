@@ -112,6 +112,7 @@ public class TakePhotoActivity extends Activity {
         params.put("userId", App.getUser().getUserId() + "");
         params.put("sceneDescription", description);
         params.put("scenePosition", App.getPosition() + "");
+        params.put("sceneStatus", "0");
         Log.e("roy", App.getPosition());
 
         try {
