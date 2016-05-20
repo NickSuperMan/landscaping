@@ -3,6 +3,7 @@ package com.zua.landscaping.utils;
 
 import com.zua.landscaping.bean.Code;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.Group;
 import com.zua.landscaping.bean.Leave;
 import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Note;
@@ -125,6 +126,11 @@ public interface ConnService {
 
     @POST("UserServlet")
     Call<Code> updateUser(
+            @QueryMap HashMap<String, String> map
+    );
+
+    @POST("AddFriendServlet")
+    Call<Code> addFriend(
             @QueryMap HashMap<String, String> map
     );
 }

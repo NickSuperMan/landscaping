@@ -24,6 +24,7 @@ import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.User;
 import com.zua.landscaping.utils.ConnService;
+import com.zua.landscaping.utils.RongCouldEvent;
 import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.utils.ToastUtils;
 import com.zua.landscaping.view.EditTextHolder;
@@ -175,6 +176,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
                         dialog.dismiss();
                     }
                     startActivity(new Intent(LoginActivity1.this, MainActivity.class));
+                    RongCouldEvent.getInstance().setOtherListener();
 
                     LoginActivity1.this.finish();
                 }

@@ -36,6 +36,8 @@ import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, RongIM.UserInfoProvider {
 
+    public static final String ACTION_DMEO_RECEIVE_MESSAGE = "action_demo_receive_message";
+    public static final String ACTION_DMEO_AGREE_REQUEST = "action_demo_agree_request";
     private RadioGroup radioGroup;
     private ImageView add;
     private FragmentController controller;

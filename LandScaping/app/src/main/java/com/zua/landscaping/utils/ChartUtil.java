@@ -1,6 +1,7 @@
 package com.zua.landscaping.utils;
 
 import android.graphics.Color;
+import android.util.Log;
 
 
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -63,6 +64,8 @@ public class ChartUtil {
             int totalTime = list.get(i).getpTotalTime();
             int usedTime = list.get(i).getpUseTime();
             double value = usedTime * 100 / totalTime;
+
+            Log.e("roy", value + "");
             yValues.add(new BarEntry((float) value, i));
         }
 

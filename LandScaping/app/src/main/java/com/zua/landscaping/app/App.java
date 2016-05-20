@@ -28,6 +28,7 @@ import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Technical;
 import com.zua.landscaping.bean.User;
 import com.zua.landscaping.bean.Weather;
+import com.zua.landscaping.utils.RongCouldEvent;
 import com.zua.landscaping.utils.ToastUtils;
 
 import java.io.File;
@@ -121,7 +122,7 @@ public class App extends Application implements BDLocationListener {
             RongIM.init(this);
 
             if (getApplicationInfo().packageName.equals(getCurProcessName(getApplicationContext()))) {
-
+                RongCouldEvent.init(this);
                 MyContext.init(this);
             }
         }

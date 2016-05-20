@@ -48,6 +48,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
 
         initView();
+
+
+        getGroupList();
+    }
+
+    private void getGroupList() {
+
     }
 
 
@@ -130,6 +137,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
             });
         }
     }
+
 
 
 }

@@ -4,11 +4,17 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/include_titile"/>
+    <include layout="@layout/include_titile" />
 
     <ListView
         android:id="@+id/listView_process_update"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:divider="@null"
+        android:dividerHeight="8dp"
+        android:fadeScrollbars="true"
+        android:fadingEdge="none" />
 
 </LinearLayout>

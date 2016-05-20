@@ -50,6 +50,10 @@ public class ProcessUpdateAdapter extends BaseAdapter {
         isUpdated = new HashMap<>();
 
         for (int i = 0; i < data.size(); i++) {
+
+            if (data.get(i).getpTotalTime() == data.get(i).getpUseTime()) {
+                continue;
+            }
             isUpdated.put(i, false);
             for (int j = 0; j < list.size(); j++) {
                 if (data.get(i).getpId() == list.get(j).getpId()) {
@@ -86,14 +90,23 @@ public class ProcessUpdateAdapter extends BaseAdapter {
 
         holder.textView.setText(data.get(position).getpName() + "");
 
+        if (data.get(position).getpTotalTime() == data.get(position).getpUseTime()) {
+            holder.button.setBackgroundResource(R.color.accent);
+            holder.button.setText("该项目已完成");
 
-        if (isUpdated.get(position)) {
+            holder.button.setClickable(false);
+        } else if (isUpdated.get(position)) {
+            holder.button.setBackgroundResource(R.color.orangered);
             holder.button.setText(context.getString(R.string.process_update_success));
         }
+
         holder.button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateProcess(v, position);
+                if (data.get(position).getpTotalTime() != data.get(position).getpUseTime()) {
+                    updateProcess(v, position);
+                }
+
             }
         });
 
