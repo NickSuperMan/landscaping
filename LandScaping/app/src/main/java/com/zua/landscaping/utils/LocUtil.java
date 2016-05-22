@@ -6,7 +6,7 @@ import android.os.storage.StorageManager;
 import android.view.Display;
 
 
-import com.zua.landscaping.activity.VideoPlayerActivity;
+
 import com.zua.landscaping.bean.ScreenBean;
 
 import java.lang.reflect.Method;
@@ -83,8 +83,8 @@ public class LocUtil {
      * @param context
      * @return
      */
-    public static ScreenBean getScreenPix(Context context) {
-        Display display = ((VideoPlayerActivity) context).getWindowManager().getDefaultDisplay();
-        return new ScreenBean(display.getWidth(), display.getHeight());
-    }
+//    public static ScreenBean getScreenPix(Context context) {
+//        Display display = ((VideoPlayerActivity) context).getWindowManager().getDefaultDisplay();
+//        return new ScreenBean(display.getWidth(), display.getHeight());
+//    }
 }

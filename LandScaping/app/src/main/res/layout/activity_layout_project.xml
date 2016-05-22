@@ -15,10 +15,11 @@
         android:layout_above="@+id/create_excel"/>
 
     <Button
+        android:background="@color/accent"
         android:layout_alignParentBottom="true"
         android:id="@+id/create_excel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Create Excel" />
+        android:text="@string/export_excel" />
 
 </RelativeLayout>

@@ -7,6 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.zua.landscaping.activity.MainActivity;
+import com.zua.landscaping.app.App;
+import com.zua.landscaping.bean.Event;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 
 /**
@@ -15,6 +20,7 @@ import com.zua.landscaping.activity.MainActivity;
 public class BaseFragment extends Fragment {
 
     protected MainActivity activity;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,4 +34,6 @@ public class BaseFragment extends Fragment {
         Intent intent = new Intent(activity, tarActivity);
         startActivity(intent);
     }
+
+
 }

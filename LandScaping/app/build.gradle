@@ -58,14 +58,28 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
     /**获取图片*/
     compile project(':library')
-    /**融云库*/
     /**柱状图库*/
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
     /**上传库*/
     compile files('libs/afinal_0.5.1_bin.jar')
     /**下拉刷新下拉加载*/
-    compile project(':vitamio')
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    /**融云库*/
     compile project(':IMKit')
+    /**图片放大缩小库*/
     compile 'com.github.chrisbanes:PhotoView:1.2.6'
     compile 'com.android.support:cardview-v7:23.3.0'
+    /**写Excel*/
+    compile 'org.apache.poi:poi:3.15-beta1'
+    compile 'jexcelapi:jxl:2.6'
+    /**列表视频库*/
+    compile 'com.yqritc:android-scalablevideoview:1.0.1'
+    /**小视频拍摄库*/
+    compile project(':WXLikeVideoRecorderLib')
+    /**事件传递库*/
+    compile 'org.greenrobot:eventbus:3.0.0'
+    /**内训泄漏检测库*/
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
+    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
 }

@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
+import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Technical;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,10 +26,10 @@ public class TechnicalAdapter extends BaseAdapter {
     private LayoutInflater inflater;
     private List<Technical> technicalList;
 
-    public TechnicalAdapter(Context context) {
+    public TechnicalAdapter(Context context,List<Technical> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
-        technicalList = App.getTechnicalList();
+        technicalList = data;
     }
 
     @Override
@@ -69,6 +71,10 @@ public class TechnicalAdapter extends BaseAdapter {
         holder.tv_content.setText(technicalList.get(position).getTechnicalSummary());
 
         return convertView;
+    }
+
+    public List<Technical> getDataList() {
+        return technicalList;
     }
 
     class ViewHolder {

@@ -2,6 +2,7 @@ package com.zua.landscaping.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -83,6 +84,10 @@ public class ScenePhotoAdapter extends BaseAdapter {
         holder.tv_time.setText(format.format(scenePhotoList.get(position).getSceneTime()));
 
         return convertView;
+    }
+
+    public List<Scene> getDataList() {
+        return scenePhotoList;
     }
 
     class ViewHolder {

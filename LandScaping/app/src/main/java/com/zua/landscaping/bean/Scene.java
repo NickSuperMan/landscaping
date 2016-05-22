@@ -13,6 +13,7 @@ public class Scene {
     private String scenePosition;
     private String scenePicUrl;
     private Date sceneTime;
+    private String videoUrl;
     private int sceneStatus;
 
 
@@ -70,6 +71,15 @@ public class Scene {
 
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+
+    public String getVideoUrl() {
+        return videoUrl;
+    }
+
+    public void setVideoUrl(String videoUrl) {
+        this.videoUrl = videoUrl;
     }
 
     @Override

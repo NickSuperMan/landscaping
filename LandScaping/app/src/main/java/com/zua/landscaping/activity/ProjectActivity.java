@@ -17,6 +17,7 @@ import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.utils.ChartUtil;
 import com.zua.landscaping.utils.ConnService;
+import com.zua.landscaping.utils.ExcelUtils;
 import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.utils.TitleBuilder;
 
@@ -55,19 +56,19 @@ public class ProjectActivity extends Activity {
 
     private void initEvent() {
 
-        List<Project> list = App.getProjectList();
+        final List<Project> list = App.getProjectList();
         BarData barData = ChartUtil.getBarData(list);
         ChartUtil.showBarChart(chart, barData);
 
 
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String fileName = Environment.getExternalStorageDirectory() + File.separator + "/shortDemo";
-//                Toast.makeText(ProjectActivity.this,"click",Toast.LENGTH_SHORT).show();
-//                ExcelUtils.writeExcel(fileName,list);
-//            }
-//        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String fileName = Environment.getExternalStorageDirectory() + File.separator + "/LandScaping";
+
+                ExcelUtils.writeExcel(ProjectActivity.this,fileName,list);
+            }
+        });
     }
 
     private void initView() {

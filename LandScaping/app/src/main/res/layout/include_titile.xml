@@ -57,10 +57,10 @@
         android:textSize="16sp"
         android:visibility="gone" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="5px"
-        android:layout_alignParentBottom="true"
-        android:background="#dedede" />
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="5px"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="#dedede" />-->
 
 </RelativeLayout>

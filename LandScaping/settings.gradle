@@ -1,4 +1,4 @@
-include ':app', ':library', ':IMKit', ':vitamio'
+include ':app', ':library', ':IMKit',  ':WXLikeVideoRecorderLib'
 project(":library").projectDir = new File("third_patry/library")
 project(":IMKit").projectDir = new File("third_patry/IMKit")
-project(":vitamio").projectDir = new File("third_patry/vitamio")
+project(":WXLikeVideoRecorderLib").projectDir = new File("third_patry/WXLikeVideoRecorderLib")

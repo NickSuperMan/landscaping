@@ -61,6 +61,10 @@ public class OpinionAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public List<Scene> getDataList() {
+        return opinionLists;
+    }
+
     class ViewHolder {
         TextView textView;
     }

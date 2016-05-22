@@ -3,12 +3,12 @@ package com.zua.landscaping.activity;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.flyco.animation.BounceEnter.BounceTopEnter;
 import com.flyco.animation.SlideExit.SlideBottomExit;
@@ -18,21 +18,19 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
-import com.zua.landscaping.bean.Note;
+import com.zua.landscaping.bean.Event;
 import com.zua.landscaping.bean.User;
-import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.FragmentController;
-import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.view.MoreWindow;
 
+import org.greenrobot.eventbus.Subscribe;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
 import io.rong.imlib.model.UserInfo;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, RongIM.UserInfoProvider {
 
@@ -91,6 +89,11 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         }
     }
 
+//    @Subscribe
+//    public void onEventMainThread(Event event) {
+//        Log.e("roy","main");
+//    }
+
     @Override
     public void onClick(View view) {
 
@@ -105,6 +108,8 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        deleteDirectory();
         FragmentController.onDestroy();
         if (null != moreWindow) {
             moreWindow.destroy();
@@ -154,6 +159,24 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
 
         return null;
     }
+
+
+    private void deleteDirectory() {
+        File imageFileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "LandScaping" + File.separator + "download");
+        if (imageFileDir.exists() && imageFileDir.isDirectory()) {
+            File[] files = imageFileDir.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                if (files[i].isFile()) {
+                    File imageFile = new File(files[i].getAbsolutePath());
+                    if (imageFile.isFile() && imageFile.exists()) {
+                        imageFile.delete();
+                    }
+                }
+            }
+            imageFileDir.delete();
+        }
+    }
+
 }
 
 

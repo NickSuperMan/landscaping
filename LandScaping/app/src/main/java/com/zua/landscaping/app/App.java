@@ -20,6 +20,7 @@ import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
+import com.squareup.leakcanary.LeakCanary;
 import com.zua.landscaping.bean.Device;
 import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Note;
@@ -28,6 +29,7 @@ import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.bean.Technical;
 import com.zua.landscaping.bean.User;
 import com.zua.landscaping.bean.Weather;
+import com.zua.landscaping.utils.LocalDisplay;
 import com.zua.landscaping.utils.RongCouldEvent;
 import com.zua.landscaping.utils.ToastUtils;
 
@@ -69,9 +71,11 @@ public class App extends Application implements BDLocationListener {
         super.onCreate();
 
         weatherIsFirstIn = true;
+        LeakCanary.install(this);
         initRong();
         initImageLoader();
         initLocation();
+        LocalDisplay.init(getApplicationContext());
 
     }
 
@@ -173,7 +177,7 @@ public class App extends Application implements BDLocationListener {
 
     public void initLocation() {
 
-        mLocationClient = new LocationClient(this);
+        mLocationClient = new LocationClient(getApplicationContext());
         mLocationClient.registerLocationListener(this);
 
         LocationClientOption option = new LocationClientOption();
