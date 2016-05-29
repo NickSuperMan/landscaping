@@ -42,6 +42,7 @@ public class WeatherActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.weather);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.weather)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

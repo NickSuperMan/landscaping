@@ -34,7 +34,7 @@ public class ConversationActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.conversation);
-
+        App.getInstance().addActivity(this);
 
         Intent intent = getIntent();
 

@@ -31,6 +31,7 @@ public class ModifyTelActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_personal_sign);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.modify_tel)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

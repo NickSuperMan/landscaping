@@ -75,6 +75,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login1);
+        App.getInstance().addActivity(this);
 
         initView();
     }
@@ -115,6 +116,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
             case R.id.app_sign_in_bt:
                 if (dialog == null) {
                     dialog = ProgressDialog.show(this, null, getString(R.string.logining));
+                    dialog.setCanceledOnTouchOutside(true);
                 }
                 initEvent();
                 break;
@@ -157,6 +159,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
      * @param token
      */
     private void connect(String token) {
+
         if (getApplicationInfo().packageName.equals(App.getCurProcessName(getApplicationContext()))) {
 
             RongIM.connect(token, new RongIMClient.ConnectCallback() {
@@ -183,7 +186,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
 
                 @Override
                 public void onError(RongIMClient.ErrorCode errorCode) {
-                    Log.e("roy", "--onError" + errorCode);
+                    Log.e("roy", "--onError" + errorCode.getValue());
                 }
             });
         }
@@ -202,14 +205,14 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
     public void onBackPressed() {
         super.onBackPressed();
         Log.e("roy", "onBackPressed");
-        this.finish();
+        App.getInstance().exit();
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
 
         if (event.KEYCODE_BACK == keyCode) {
-            this.finish();
+            App.getInstance().exit();
         }
         return super.onKeyDown(keyCode, event);
     }

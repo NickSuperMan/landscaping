@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Code;
+import com.zua.landscaping.bean.Leave;
 import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.utils.TitleBuilder;
@@ -68,6 +69,7 @@ public class ApplyLeaveActivity extends Activity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_apply_leave);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.apply_leave)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +113,10 @@ public class ApplyLeaveActivity extends Activity implements View.OnClickListener
     }
 
     private void uploadLeaveApply() {
-        String reason = apply_reason.getText().toString().trim();
-        String leaveTime = tv_leave_time.getText().toString().trim();
-        String backTime = tv_back_time.getText().toString().trim();
+
+        final String reason = apply_reason.getText().toString().trim();
+        final String leaveTime = tv_leave_time.getText().toString().trim();
+        final String backTime = tv_back_time.getText().toString().trim();
 
         ConnService service = ServiceGenerator.createService(ConnService.class);
         HashMap<String, String> map = new HashMap<>();
@@ -129,6 +132,8 @@ public class ApplyLeaveActivity extends Activity implements View.OnClickListener
                 if (response.isSuccess()) {
                     Code code = response.body();
                     if (code.getCode() == 1) {
+                        Leave leave = new Leave();
+
                         ToastUtils.showShort(ApplyLeaveActivity.this, code.getMessage());
                         clearView();
                         finish();

@@ -57,6 +57,7 @@ public class PersonalActivity extends Activity implements AdapterView.OnItemClic
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_personal);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.personal_center)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

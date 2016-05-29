@@ -77,7 +77,7 @@
 
         <activity android:name=".activity.RecordVideoActivity" />
 
-        <activity android:name=".activity.TakePhotoActivity" />
+        <activity android:name=".activity.TakePhotoActivity2" />
 
         <activity android:name=".activity.LoginActivity1" />
 
@@ -105,10 +105,12 @@
 
         <activity android:name=".activity.OpinionActivity" />
 
+        <activity android:name=".activity.ProjectDrawing" />
+
+        <activity android:name=".activity.MeetingActivity" />
+
         <activity
-            android:name=".activity.SafeUploadActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:name=".activity.SafeUploadActivity" />
 
         <activity android:name=".activity.PhotoViewPagerPreview" />
 

@@ -43,6 +43,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_login);
+        App.getInstance().addActivity(this);
 
 //        new TitleBuilder(this).setTitleText(getString(R.string.login)).build();
 

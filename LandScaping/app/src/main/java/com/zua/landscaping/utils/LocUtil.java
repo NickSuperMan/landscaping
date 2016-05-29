@@ -3,11 +3,6 @@ package com.zua.landscaping.utils;
 import android.content.Context;
 import android.media.AudioManager;
 import android.os.storage.StorageManager;
-import android.view.Display;
-
-
-
-import com.zua.landscaping.bean.ScreenBean;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;

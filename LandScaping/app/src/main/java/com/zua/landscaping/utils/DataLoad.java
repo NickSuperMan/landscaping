@@ -4,7 +4,10 @@ import android.util.Log;
 
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.Drawing;
 import com.zua.landscaping.bean.Event;
+import com.zua.landscaping.bean.Leave;
+import com.zua.landscaping.bean.Meeting;
 import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.bean.Scene;
@@ -12,6 +15,7 @@ import com.zua.landscaping.bean.Technical;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -31,6 +35,8 @@ public class DataLoad {
     private static List<Device> deviceList;
     private static List<Technical> technicalList;
     private static List<News> newsList;
+    private static List<Drawing> drawingList;
+    private static List<Meeting> meetingList;
 
 
     private static ConnService service = ServiceGenerator.createService(ConnService.class);
@@ -207,7 +213,45 @@ public class DataLoad {
             public void onFailure(Call<List<Scene>> call, Throwable t) {
                 Log.e("roy", "~~~~~~~" + t.toString());
             }
+        });
+    }
 
+    public static void getDrawingData() {
+        Call<List<Drawing>> call = service.getAllDrawing();
+        call.enqueue(new Callback<List<Drawing>>() {
+            @Override
+            public void onResponse(Call<List<Drawing>> call, Response<List<Drawing>> response) {
+                if (response.isSuccess()) {
+                    drawingList = response.body();
+                    App.setDrawingList(drawingList);
+                    EventBus.getDefault().post(new Event("9"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Drawing>> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public static void getMeetingData() {
+        Call<List<Meeting>> call = service.getAllMeeting();
+        call.enqueue(new Callback<List<Meeting>>() {
+            @Override
+            public void onResponse(Call<List<Meeting>> call, Response<List<Meeting>> response) {
+                if (response.isSuccess()) {
+                    meetingList = response.body();
+                    Log.e("roy", meetingList.toString());
+                    App.setMeetingList(meetingList);
+                    EventBus.getDefault().post(new Event("10"));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Meeting>> call, Throwable t) {
+                Log.e("roy", t.toString());
+            }
         });
     }
 

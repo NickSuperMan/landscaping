@@ -13,6 +13,7 @@ public class Leave {
     private String leaveReason;
     private Date leaveTime;
     private Date backTime;
+    private Date realBackTime;
 
     public Date getBackTime() {
         return backTime;
@@ -50,24 +51,32 @@ public class Leave {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public String getLeaveReason() {
+        return leaveReason;
     }
 
-	@Override
-	public String toString() {
-		return "Leave [leaveId=" + leaveId + ", userId=" + userId
-				+ ", leaveStatus=" + leaveStatus + ", leaveReason="
-				+ leaveReason + ", leaveTime=" + leaveTime + ", backTime="
-				+ backTime + "]";
-	}
+    public void setLeaveReason(String leaveReason) {
+        this.leaveReason = leaveReason;
+    }
 
-	public String getLeaveReason() {
-		return leaveReason;
-	}
+    public Date getRealBackTime() {
+        return realBackTime;
+    }
 
-	public void setLeaveReason(String leaveReason) {
-		this.leaveReason = leaveReason;
-	}
+    public void setRealBackTime(Date realBackTime) {
+        this.realBackTime = realBackTime;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+
+    }
+    @Override
+    public String toString() {
+        return "Leave [leaveId=" + leaveId + ", userId=" + userId
+                + ", leaveStatus=" + leaveStatus + ", leaveReason="
+                + leaveReason + ", leaveTime=" + leaveTime + ", backTime="
+                + backTime + ", realBackTime=" + realBackTime + "]";
+    }
 
 }

@@ -31,6 +31,7 @@ public class OpinionActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.actvity_layout_opinion);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.opinion)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

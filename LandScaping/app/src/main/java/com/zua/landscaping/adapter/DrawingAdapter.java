@@ -11,24 +11,27 @@ import android.widget.TextView;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
-import com.zua.landscaping.bean.Scene;
+import com.zua.landscaping.bean.Device;
 
 import java.util.List;
 
+
 /**
- * Created by roy on 16/5/14.
+ * Created by roy on 16/5/6.
  */
-public class OpinionAdapter extends BaseAdapter {
+public class DrawingAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private List<Scene> opinionLists;
+    private List<Device> deviceList;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
 
-    public OpinionAdapter(Context context, List<Scene> datas) {
+    public DrawingAdapter(Context context) {
         inflater = LayoutInflater.from(context);
-        this.opinionLists = datas;
+        deviceList = App.getDeviceList();
+
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
                 .cacheInMemory(true)
@@ -38,12 +41,12 @@ public class OpinionAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return opinionLists == null ? 0 : opinionLists.size();
+        return deviceList == null ? 0 : deviceList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return opinionLists.get(position);
+        return deviceList.get(position);
     }
 
     @Override
@@ -53,35 +56,30 @@ public class OpinionAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
         ViewHolder holder = null;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.layout_scene_opinion_item, null);
+            convertView = inflater.inflate(R.layout.activity_layout_device_item, null);
             holder = new ViewHolder();
-            holder.tv_user_name = (TextView) convertView.findViewById(R.id.item_opinion_user_name);
-            holder.imageView = (ImageView) convertView.findViewById(R.id.item_opinion_user_pic);
-            holder.textView = (TextView) convertView.findViewById(R.id.opinion_text);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.item_device_image);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.item_device_name);
+            holder.tv_owner = (TextView) convertView.findViewById(R.id.item_device_owner);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.tv_user_name.setText(opinionLists.get(position).getUserName());
-        imageLoader.displayImage(Constant.BasePath + opinionLists.get(position).getUserPicUrl(), holder.imageView, options);
-        holder.textView.setText(opinionLists.get(position).getSceneDescription());
+        imageLoader.displayImage(Constant.BasePath + deviceList.get(position).getDevicecPicUrl(), holder.imageView, options);
 
-
+        holder.tv_name.setText(deviceList.get(position).getDeviceName() + "");
+        holder.tv_owner.setText(deviceList.get(position).getDeviceOwner() + "");
         return convertView;
     }
 
-    public List<Scene> getDataList() {
-        return opinionLists;
-    }
-
     class ViewHolder {
-        TextView tv_user_name;
         ImageView imageView;
-        TextView textView;
+        TextView tv_name;
+        TextView tv_owner;
     }
 }

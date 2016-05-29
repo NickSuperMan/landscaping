@@ -47,7 +47,7 @@ public class NoteActivity extends Activity implements AdapterView.OnItemClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_note);
-
+        App.getInstance().addActivity(this);
 
         if (App.getNoteList() == null) {
             getNoteDatas();

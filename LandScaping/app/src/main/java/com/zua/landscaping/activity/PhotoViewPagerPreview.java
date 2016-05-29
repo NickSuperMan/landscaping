@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.view.HackyViewPager;
 
@@ -41,6 +42,8 @@ public class PhotoViewPagerPreview extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_layout_photo_viewpager);
+        App.getInstance().addActivity(this);
+
         path = getIntent().getStringExtra("url");
 
         paths = path.split("jpg");
@@ -86,6 +89,7 @@ public class PhotoViewPagerPreview extends Activity {
                 public void onLoadingStarted(String imageUri, View view) {
                     if (dialog == null) {
                         dialog = ProgressDialog.show(PhotoViewPagerPreview.this, null, getString(R.string.loading));
+                        dialog.setCanceledOnTouchOutside(true);
                     }
                 }
 

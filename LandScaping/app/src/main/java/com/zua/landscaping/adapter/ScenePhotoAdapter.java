@@ -66,6 +66,10 @@ public class ScenePhotoAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.layout_scene_photo_item, null);
             holder = new ViewHolder();
+
+            holder.tv_user_name = (TextView) convertView.findViewById(R.id.item_photo_user_name);
+            holder.img_user_pic = (ImageView) convertView.findViewById(R.id.item_photo_user_pic);
+
             holder.textView = (TextView) convertView.findViewById(R.id.item_photo_name);
             holder.imageView = (ImageView) convertView.findViewById(R.id.item_photo_image);
             holder.tv_position = (TextView) convertView.findViewById(R.id.item_photo_position);
@@ -75,8 +79,12 @@ public class ScenePhotoAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        holder.tv_user_name.setText(scenePhotoList.get(position).getUserName());
+        imageLoader.displayImage(Constant.BasePath + scenePhotoList.get(position).getUserPicUrl(), holder.img_user_pic, options);
+
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String photoPath = scenePhotoList.get(position).getScenePicUrl().split("jpg")[0]+"jpg";
+        String photoPath = scenePhotoList.get(position).getScenePicUrl().split("jpg")[0] + "jpg";
 
         imageLoader.displayImage(Constant.BasePath + photoPath, holder.imageView, options);
         holder.textView.setText(scenePhotoList.get(position).getSceneDescription());
@@ -91,6 +99,8 @@ public class ScenePhotoAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        TextView tv_user_name;
+        ImageView img_user_pic;
         TextView textView;
         ImageView imageView;
         TextView tv_position;

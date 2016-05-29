@@ -24,7 +24,7 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         EventBus.getDefault().register(this);
         setContentView(R.layout.activity_layout_splash);
-
+        App.getInstance().addActivity(this);
         getData();
     }
 
@@ -37,6 +37,8 @@ public class SplashActivity extends Activity {
         DataLoad.getOpinionData();
         DataLoad.getDeviceData();
         DataLoad.getTechnicalData();
+        DataLoad.getDrawingData();
+        DataLoad.getMeetingData();
     }
 
     @Subscribe
@@ -46,7 +48,7 @@ public class SplashActivity extends Activity {
 
         if (App.getSceneVideoList() != null && App.getScenePhotoList() != null && App.getProjectList() != null &&
                 App.getDeviceList() != null && App.getTechnicalList() != null && App.getNewsList() != null && App.getSceneOpinionList() != null
-                && App.getSceneSafeList() != null) {
+                && App.getSceneSafeList() != null && App.getDrawingList() != null && App.getMeetingList() != null) {
 
             startActivity(new Intent(SplashActivity.this, LoginActivity1.class));
             finish();

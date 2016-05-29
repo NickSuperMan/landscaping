@@ -14,9 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.yqritc.scalablevideoview.ScalableVideoView;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
+import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.bean.Scene;
 import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.ServiceGenerator;
@@ -26,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -51,12 +55,20 @@ public class SceneVideoAdapter extends BaseAdapter {
 
     private Context context;
 
-    private String path;
+    private String localPath;
+
+    private ImageLoader imageLoader;
+    private DisplayImageOptions options;
 
     public SceneVideoAdapter(Context context, List<Scene> data) {
         this.context = context;
         inflater = LayoutInflater.from(context);
         sceneVideoList = data;
+        imageLoader = ImageLoader.getInstance();
+        options = new DisplayImageOptions.Builder()
+                .cacheInMemory(true)
+                .cacheOnDisk(true)
+                .build();
     }
 
     @Override
@@ -82,6 +94,11 @@ public class SceneVideoAdapter extends BaseAdapter {
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.layout_scene_video_item, null);
             holder = new ViewHolder();
+
+            holder.tv_user_name = (TextView) convertView.findViewById(R.id.item_video_user_name);
+
+            holder.img_user_pic = (ImageView) convertView.findViewById(R.id.item_video_user_pic);
+
             holder.textView = (TextView) convertView.findViewById(R.id.item_video_name);
             holder.videoView = (ScalableVideoView) convertView.findViewById(R.id.item_video_videoview);
 
@@ -96,10 +113,19 @@ public class SceneVideoAdapter extends BaseAdapter {
                 e.printStackTrace();
             }
             holder.playImageView = (ImageView) convertView.findViewById(R.id.item_video_playImageView);
+            holder.thumbnailImageView = (ImageView) convertView.findViewById(R.id.item_video_thumbnailImageView);
+            holder.tv_position = (TextView) convertView.findViewById(R.id.item_video_position);
+            holder.tv_time = (TextView) convertView.findViewById(R.id.item_video_time);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
+        holder.tv_user_name.setText(sceneVideoList.get(position).getUserName());
+        imageLoader.displayImage(Constant.BasePath + sceneVideoList.get(position).getUserPicUrl(), holder.img_user_pic, options);
+
+        imageLoader.displayImage(Constant.BasePath + sceneVideoList.get(position).getScenePicUrl().split("_")[1], holder.thumbnailImageView, options);
 
         holder.textView.setText(sceneVideoList.get(position).getSceneDescription());
 
@@ -114,12 +140,11 @@ public class SceneVideoAdapter extends BaseAdapter {
 
                 if (sceneVideoList.get(position).getVideoUrl() != null) {
 
-
-                    path = sceneVideoList.get(position).getVideoUrl();
-                    playVideo(finalHolder.videoView, finalHolder.playImageView);
+                    localPath = sceneVideoList.get(position).getVideoUrl();
+                    playVideo(finalHolder.videoView, finalHolder.playImageView, finalHolder.thumbnailImageView);
                 } else {
-                    path = null;
-                    downLoadVideo(finalHolder.videoView, position, finalHolder.playImageView);
+                    localPath = null;
+                    downLoadVideo(finalHolder.videoView, position, finalHolder.playImageView, finalHolder.thumbnailImageView);
                 }
             }
         });
@@ -129,29 +154,32 @@ public class SceneVideoAdapter extends BaseAdapter {
             public void onClick(View v) {
                 finalHolder.videoView.stop();
                 finalHolder.playImageView.setVisibility(View.VISIBLE);
+                finalHolder.thumbnailImageView.setVisibility(View.VISIBLE);
             }
         });
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        holder.tv_position.setText(sceneVideoList.get(position).getScenePosition());
+        holder.tv_time.setText(format.format(sceneVideoList.get(position).getSceneTime()));
 
         return convertView;
     }
 
 
-    private void downLoadVideo(final ScalableVideoView videoView, final int position, final ImageView playImageView) {
+    private void downLoadVideo(final ScalableVideoView videoView, final int position, final ImageView playImageView, final ImageView thumbImageView) {
         ConnService service = ServiceGenerator.createService(ConnService.class);
-        Call<ResponseBody> call = service.downloadFileWithDynamicUrlSync(sceneVideoList.get(position).getScenePicUrl());
+
+        Call<ResponseBody> call = service.downloadFileWithDynamicUrlSync(sceneVideoList.get(position).getScenePicUrl().split("_")[2]);
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.isSuccess()) {
 
-                    Log.e("roy", "success+");
                     boolean writtenToDisk = writeResponseBodyToDisk(response.body());
 
-                    sceneVideoList.get(position).setVideoUrl(path);
+                    sceneVideoList.get(position).setVideoUrl(localPath);
 
-                    Log.e("roy", path);
                     if (writtenToDisk) {
-                        playVideo(videoView, playImageView);
+                        playVideo(videoView, playImageView, thumbImageView);
                     }
                 }
             }
@@ -163,15 +191,15 @@ public class SceneVideoAdapter extends BaseAdapter {
         });
     }
 
-    private void playVideo(ScalableVideoView mScalableVideoView, ImageView mPlayImageView) {
+    private void playVideo(ScalableVideoView mScalableVideoView, ImageView mPlayImageView, ImageView thumbImageView) {
 
         try {
-            mScalableVideoView.setDataSource(path);
+            mScalableVideoView.setDataSource(localPath);
             mScalableVideoView.setLooping(true);
             mScalableVideoView.prepare();
             mScalableVideoView.start();
             mPlayImageView.setVisibility(View.GONE);
-
+            thumbImageView.setVisibility(View.GONE);
         } catch (IOException e) {
             Log.e("roy", e.getLocalizedMessage());
             Toast.makeText(context, "播放视频异常", Toast.LENGTH_SHORT).show();
@@ -192,10 +220,10 @@ public class SceneVideoAdapter extends BaseAdapter {
             // todo change the file location/name according to your needs
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".mp4";
 
-            path = Environment.getExternalStorageDirectory() + MEDIA_FILE_DIR + File.separator + timeStamp;
+            localPath = Environment.getExternalStorageDirectory() + MEDIA_FILE_DIR + File.separator + timeStamp;
 
 
-            File futureStudioIconFile = new File(path);
+            File futureStudioIconFile = new File(localPath);
 
 
             InputStream inputStream = null;
@@ -221,7 +249,7 @@ public class SceneVideoAdapter extends BaseAdapter {
 
                     fileSizeDownloaded += read;
 
-                    Log.e("roy", "file download: " + fileSizeDownloaded + " of " + fileSize);
+//                    Log.e("roy", "file download: " + fileSizeDownloaded + " of " + fileSize);
                 }
 
                 outputStream.flush();
@@ -248,11 +276,14 @@ public class SceneVideoAdapter extends BaseAdapter {
     }
 
     class ViewHolder {
+        TextView tv_user_name;
+        ImageView img_user_pic;
         TextView textView;
         ScalableVideoView videoView;
-        //        ImageView thumbnailImageView;
+        ImageView thumbnailImageView;
         ImageView playImageView;
-
+        TextView tv_position;
+        TextView tv_time;
     }
 
 }

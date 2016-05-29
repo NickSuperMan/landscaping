@@ -33,6 +33,8 @@ public class BitmapUtils {
     public static ArrayList<ImageItem> tempSelectBitmap = new ArrayList<>();   //选择的图片的临时列表
 
     public static Bitmap revitionImageSize(String path) throws IOException {
+
+        Bitmap bitmap = null;
         BufferedInputStream in = new BufferedInputStream(new FileInputStream(
                 new File(path)));
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -40,7 +42,6 @@ public class BitmapUtils {
         BitmapFactory.decodeStream(in, null, options);
         in.close();
         int i = 0;
-        Bitmap bitmap = null;
         while (true) {
             if ((options.outWidth >> i <= 1000)
                     && (options.outHeight >> i <= 1000)) {

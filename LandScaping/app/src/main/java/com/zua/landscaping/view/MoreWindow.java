@@ -33,13 +33,17 @@ import com.zua.landscaping.activity.ProcessUpdateActivity;
 import com.zua.landscaping.activity.RecordVideoActivity;
 import com.zua.landscaping.activity.SafeUploadActivity;
 import com.zua.landscaping.activity.TakePhotoActivity;
+import com.zua.landscaping.activity.TakePhotoActivity2;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Code;
+import com.zua.landscaping.bean.Event;
 import com.zua.landscaping.bean.Project;
 import com.zua.landscaping.bean.Sign;
 import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.ServiceGenerator;
 import com.zua.landscaping.utils.ToastUtils;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -250,7 +254,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
         switch (v.getId()) {
             case R.id.upload_photo:
 
-                mContext.startActivity(new Intent(mContext, TakePhotoActivity.class));
+                mContext.startActivity(new Intent(mContext, TakePhotoActivity2.class));
                 clearPopup();
                 break;
             case R.id.upload_video:
@@ -307,6 +311,7 @@ public class MoreWindow extends PopupWindow implements OnClickListener {
 
                     if (body.getCode() == 1) {
                         ToastUtils.showShort(mContext, body.getMessage());
+                        EventBus.getDefault().post(new Event("sign"));
                     } else {
                         ToastUtils.showShort(mContext, body.getMessage());
                     }

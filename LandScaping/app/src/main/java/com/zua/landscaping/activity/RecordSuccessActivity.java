@@ -19,6 +19,7 @@ import com.yqritc.scalablevideoview.ScalableVideoView;
 import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
+import com.zua.landscaping.utils.BitmapUtils;
 import com.zua.landscaping.utils.TitleBuilder;
 import com.zua.landscaping.utils.ToastUtils;
 
@@ -30,6 +31,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import sz.itguy.utils.BitmapUtil;
 
 /**
  * Created by roy on 4/27/16.
@@ -43,12 +46,13 @@ public class RecordSuccessActivity extends Activity {
     private EditText video_text_description;
     private String description;
     private ProgressDialog dialog;
+    private File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_preview_video);
-
+        App.getInstance().addActivity(this);
 
 
         path = getIntent().getStringExtra("text");
@@ -71,7 +75,12 @@ public class RecordSuccessActivity extends Activity {
         mPlayImageView = (ImageView) findViewById(R.id.playImageView);
 
         mThumbnailImageView = (ImageView) findViewById(R.id.thumbnailImageView);
-        mThumbnailImageView.setImageBitmap(getVideoThumbnail(path));
+
+        photoFile = BitmapUtils.getImageFile();
+        Bitmap bitmap = getVideoThumbnail(path);
+        BitmapUtils.saveBitmap(bitmap, photoFile);
+
+        mThumbnailImageView.setImageBitmap(bitmap);
 
 
         video_text_description = (EditText) findViewById(R.id.video_text_description);
@@ -129,7 +138,6 @@ public class RecordSuccessActivity extends Activity {
                 break;
             case R.id.playImageView:
                 try {
-
                     mScalableVideoView.setDataSource(path);
                     mScalableVideoView.setLooping(false);
                     mScalableVideoView.prepare();
@@ -154,9 +162,11 @@ public class RecordSuccessActivity extends Activity {
         params.put("userId", App.getUser().getUserId() + "");
         params.put("sceneDescription", description);
         params.put("scenePosition", App.getPosition() + "");
+
         Log.e("roy", App.getPosition());
 
         try {
+            params.put("photoFile", photoFile);
             params.put("file", file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();

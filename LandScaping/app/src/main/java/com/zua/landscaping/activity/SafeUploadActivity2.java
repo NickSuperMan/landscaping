@@ -1,7 +1,6 @@
 package com.zua.landscaping.activity;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -52,7 +51,7 @@ import java.util.List;
 /**
  * Created by roy on 16/5/14.
  */
-public class SafeUploadActivity extends Activity {
+public class SafeUploadActivity2 extends Activity {
 
     private static final int TAKE_PICTURE = 1;
     private static final int REQUESTCODE_PICK = 2;
@@ -113,7 +112,7 @@ public class SafeUploadActivity extends Activity {
             @Override
             public void onSuccess(Object o) {
                 super.onSuccess(o);
-                ToastUtils.showShort(SafeUploadActivity.this, "upload success");
+                ToastUtils.showShort(SafeUploadActivity2.this, "upload success");
             }
         });
     }
@@ -189,7 +188,7 @@ public class SafeUploadActivity extends Activity {
                                     long arg3) {
                 if (arg2 == BitmapUtils.tempSelectBitmap.size()) {
 
-                    ll_popup.startAnimation(AnimationUtils.loadAnimation(SafeUploadActivity.this, R.anim.activity_translate_in));
+                    ll_popup.startAnimation(AnimationUtils.loadAnimation(SafeUploadActivity2.this, R.anim.activity_translate_in));
                     pop.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
                 } else {
 //                    Intent intent = new Intent(MainActivity.this,

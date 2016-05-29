@@ -28,6 +28,8 @@ public class DeviceListActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_device);
+        App.getInstance().addActivity(this);
+
         new TitleBuilder(this).setTitleText(getString(R.string.take_device)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -31,7 +31,7 @@ public class AddNoteActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_note_add);
-
+        App.getInstance().addActivity(this);
         new TitleBuilder(this).setTitleText(getString(R.string.note_add)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

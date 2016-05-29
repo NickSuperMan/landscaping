@@ -1,5 +1,6 @@
 package com.zua.landscaping.activity;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.bean.Event;
 import com.zua.landscaping.bean.User;
+import com.zua.landscaping.utils.DataLoad;
 import com.zua.landscaping.utils.FragmentController;
 import com.zua.landscaping.view.MoreWindow;
 
@@ -30,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
+import io.rong.imkit.widget.provider.SystemConversationProvider;
 import io.rong.imlib.model.UserInfo;
 
 public class MainActivity extends FragmentActivity implements RadioGroup.OnCheckedChangeListener, View.OnClickListener, RongIM.UserInfoProvider {
@@ -49,16 +52,17 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         RongIM.setUserInfoProvider(this, true);
         setContentView(R.layout.activity_main);
 
+        App.getInstance().addActivity(this);
+
         data = App.getUser().getFriends();
-        Log.e("roy", "data" + data.toString());
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         controller = FragmentController.getInstance(this, R.id.fl_content);
         controller.showFragments(0);
 
         initView();
-    }
 
+    }
 
     private void initView() {
         radioGroup = (RadioGroup) findViewById(R.id.group);
@@ -89,10 +93,6 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
         }
     }
 
-//    @Subscribe
-//    public void onEventMainThread(Event event) {
-//        Log.e("roy","main");
-//    }
 
     @Override
     public void onClick(View view) {
@@ -139,7 +139,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
             @Override
             public void onBtnClick() {
                 dialog.superDismiss();
-                finish();
+                App.getInstance().exit();
             }
         });
     }
@@ -176,6 +176,7 @@ public class MainActivity extends FragmentActivity implements RadioGroup.OnCheck
             imageFileDir.delete();
         }
     }
+
 
 }
 

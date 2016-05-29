@@ -126,6 +126,7 @@ public class ProcessUpdateAdapter extends BaseAdapter {
 
                     button.setText(context.getString(R.string.process_update_success));
                     button.setClickable(false);
+                    notifyDataSetChanged();
                     ToastUtils.showShort(context, response.body().getMessage());
                 }
             }

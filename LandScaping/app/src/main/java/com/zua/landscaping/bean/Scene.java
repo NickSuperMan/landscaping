@@ -2,10 +2,12 @@ package com.zua.landscaping.bean;
 
 import java.util.Date;
 
+
 /**
  * Created by roy on 4/26/16.
  */
 public class Scene {
+
 
     private int sceneId;
     private int userId;
@@ -13,8 +15,11 @@ public class Scene {
     private String scenePosition;
     private String scenePicUrl;
     private Date sceneTime;
-    private String videoUrl;
     private int sceneStatus;
+    private String userName;
+    private String userPicUrl;
+    private String videoUrl;
+
 
 
     public String getSceneDescription() {
@@ -73,6 +78,21 @@ public class Scene {
         this.userId = userId;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getUserPicUrl() {
+        return userPicUrl;
+    }
+
+    public void setUserPicUrl(String userPicUrl) {
+        this.userPicUrl = userPicUrl;
+    }
 
     public String getVideoUrl() {
         return videoUrl;
@@ -84,14 +104,11 @@ public class Scene {
 
     @Override
     public String toString() {
-        return "Scene{" +
-                "sceneDescription='" + sceneDescription + '\'' +
-                ", sceneId=" + sceneId +
-                ", userId=" + userId +
-                ", scenePosition='" + scenePosition + '\'' +
-                ", scenePicUrl='" + scenePicUrl + '\'' +
-                ", sceneTime=" + sceneTime +
-                ", sceneStatus=" + sceneStatus +
-                '}';
+        return "Scene [sceneId=" + sceneId + ", userId=" + userId
+                + ", sceneDescription=" + sceneDescription + ", scenePosition="
+                + scenePosition + ", scenePicUrl=" + scenePicUrl
+                + ", sceneTime=" + sceneTime + ", sceneStatus=" + sceneStatus
+                + ", userName=" + userName + ", userPicUrl=" + userPicUrl + "]";
     }
+
 }

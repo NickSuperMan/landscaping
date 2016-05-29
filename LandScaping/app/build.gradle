@@ -42,7 +42,6 @@ dependencies {
     compile 'com.flyco.banner:FlycoBanner_Lib:2.0.2@aar'
     compile 'com.flyco.dialog:FlycoDialog_Lib:1.2.6@aar'
     compile 'com.android.support:support-v4:23.3.0'
-    compile 'com.github.bumptech.glide:glide:3.7.0'
     /** 实现侧滑*/
     compile('com.mikepenz:materialdrawer:5.2.0@aar') {
         transitive = true
@@ -78,7 +77,7 @@ dependencies {
     compile project(':WXLikeVideoRecorderLib')
     /**事件传递库*/
     compile 'org.greenrobot:eventbus:3.0.0'
-    /**内训泄漏检测库*/
+    /**内存泄漏检测库*/
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.4-beta2'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.4-beta2'

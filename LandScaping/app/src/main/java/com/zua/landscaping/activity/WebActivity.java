@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 import android.widget.ImageButton;
 
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.utils.TitleBuilder;
 
 
@@ -38,6 +39,7 @@ public class WebActivity extends Activity {
         }).build();
 
         final WebView webView = (WebView) findViewById(R.id.web_view);
+        App.getInstance().addActivity(this);
 
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);

@@ -84,4 +84,8 @@
     <string name="write_sth">写下你的建议...</string>
     <string name="safe_upload">隐患上报</string>
     <string name="export_excel">导出Excel表</string>
+    <string name="wait">请稍等</string>
+    <string name="leave_timeup">已过期</string>
+    <string name="take_drawing">图纸查看</string>
+    <string name="take_meeting">会议记录</string>
 </resources>

@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.zua.landscaping.R;
 import com.zua.landscaping.adapter.MyGroupAdapter;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.utils.TitleBuilder;
 
 import java.util.List;
@@ -32,6 +33,7 @@ public class AddGroupActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.layout_add_group);
+        App.getInstance().addActivity(this);
 
         initView();
 

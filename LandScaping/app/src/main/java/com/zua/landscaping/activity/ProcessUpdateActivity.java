@@ -8,6 +8,7 @@ import android.widget.ListView;
 
 import com.zua.landscaping.R;
 import com.zua.landscaping.adapter.ProcessUpdateAdapter;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Update;
 import com.zua.landscaping.utils.ConnService;
 import com.zua.landscaping.utils.ServiceGenerator;
@@ -31,6 +32,8 @@ public class ProcessUpdateActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_process_update);
+        App.getInstance().addActivity(this);
+
         getUpdateData();
         new TitleBuilder(this).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

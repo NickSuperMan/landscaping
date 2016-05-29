@@ -148,6 +148,7 @@ public class VideoFragment extends BaseFragment {
             adapter.getDataList().addAll(App.getSceneVideoList());
             mPtrFrameLayout.refreshComplete();
             adapter.notifyDataSetChanged();
+
         }
 
     }

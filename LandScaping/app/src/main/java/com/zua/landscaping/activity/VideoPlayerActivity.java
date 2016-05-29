@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.yqritc.scalablevideoview.ScalableVideoView;
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 
 
 public class VideoPlayerActivity extends Activity {
@@ -19,6 +20,8 @@ public class VideoPlayerActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.actiity_layout_video_player);
+        App.getInstance().addActivity(this);
+
         Intent intent = getIntent();
         path = intent.getStringExtra("url");
 

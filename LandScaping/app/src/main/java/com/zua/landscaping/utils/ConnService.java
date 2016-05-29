@@ -3,8 +3,10 @@ package com.zua.landscaping.utils;
 
 import com.zua.landscaping.bean.Code;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.Drawing;
 import com.zua.landscaping.bean.Group;
 import com.zua.landscaping.bean.Leave;
+import com.zua.landscaping.bean.Meeting;
 import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.bean.Project;
@@ -85,6 +87,12 @@ public interface ConnService {
             @QueryMap HashMap<String, String> map
     );
 
+    @POST("LeaveSerlvlet")
+    Call<Code> comeBack(
+            @Query("method") String method,
+            @Query("leaveId") String leaveId
+    );
+
     @POST("UpdateProcessServlet")
     Call<List<Update>> getUpdateData(
             @Query("method") String method
@@ -138,6 +146,13 @@ public interface ConnService {
 
     @GET
     Call<ResponseBody> downloadFileWithDynamicUrlSync(@Url String fileUrl);
+
+    @GET("DrawingServlet")
+    Call<List<Drawing>> getAllDrawing();
+
+    @GET("MeetingServlet")
+    Call<List<Meeting>> getAllMeeting();
+
 }
 
 

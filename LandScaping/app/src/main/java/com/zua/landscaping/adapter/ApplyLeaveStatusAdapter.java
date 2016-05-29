@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.zua.landscaping.R;
 import com.zua.landscaping.bean.Leave;
+import com.zua.landscaping.bean.Scene;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -64,18 +65,22 @@ public class ApplyLeaveStatusAdapter extends BaseAdapter {
         holder.reason.setText(data.get(position).getLeaveReason());
         holder.leave_time.setText(format.format(data.get(position).getLeaveTime()));
         holder.back_time.setText(format.format(data.get(position).getBackTime()));
-        if (data.get(position).getLeaveStatus() == 1){
+        if (data.get(position).getLeaveStatus() == 1) {
             holder.leave_status.setText(context.getString(R.string.leave_success));
-        }else if (data.get(position).getLeaveStatus() == 0){
+        } else if (data.get(position).getLeaveStatus() == 0) {
             holder.leave_status.setText(context.getString(R.string.leave_waiting));
 
-        }else{
+        } else if (data.get(position).getLeaveStatus() == 2) {
             holder.leave_status.setText(context.getString(R.string.leave_failure));
-        }
+        } else if (data.get(position).getLeaveStatus() == 3) {
 
+            holder.leave_status.setText(context.getString(R.string.leave_timeup));
+        }
         return convertView;
     }
-
+    public List<Leave> getDataList() {
+        return data;
+    }
     class ViewHolder {
         TextView reason;
         TextView leave_time;

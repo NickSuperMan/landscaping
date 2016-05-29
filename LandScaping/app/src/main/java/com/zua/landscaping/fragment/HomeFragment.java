@@ -30,15 +30,18 @@ import com.zua.landscaping.R;
 import com.zua.landscaping.activity.LeaveStatusActivity;
 import com.zua.landscaping.activity.LoginActivity;
 import com.zua.landscaping.activity.LoginActivity1;
+import com.zua.landscaping.activity.MeetingActivity;
 import com.zua.landscaping.activity.NoteActivity;
 import com.zua.landscaping.activity.OpinionActivity;
 import com.zua.landscaping.activity.PersonalActivity;
 import com.zua.landscaping.activity.ProjectActivity;
+import com.zua.landscaping.activity.ProjectDrawing;
 import com.zua.landscaping.activity.WeatherActivity;
 import com.zua.landscaping.activity.WebActivity;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.banner.SimpleImageBanner;
+import com.zua.landscaping.bean.Event;
 import com.zua.landscaping.bean.Sign;
 import com.zua.landscaping.testData.HomeDatas;
 import com.zua.landscaping.utils.ConnService;
@@ -48,6 +51,9 @@ import com.zua.landscaping.utils.TitleBuilder;
 import com.zua.landscaping.utils.ToastUtils;
 import com.zua.landscaping.utils.ViewFindUtils;
 import com.zua.landscaping.view.RoundProgressBar;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -73,6 +79,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
     private Sign sign;
 
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EventBus.getDefault().register(this);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -81,7 +93,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
         new TitleBuilder(view).setLeftImage(R.drawable.me).setTitleText("首页").setLeftClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.showShort(getActivity(), "click");
+
                 result.openDrawer();
             }
         }).setRightImage(R.drawable.icon_search).setRightOnclickListener(new View.OnClickListener() {
@@ -125,7 +137,6 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
                     sign = response.body();
                     current_people.setText(sign.getCurrentPeople() + "");
                     max_people.setText(sign.getTotalPeople() + "");
-                    Log.e("roy", sign.toString());
                 }
             }
 
@@ -222,6 +233,13 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
     }
 
+    @Subscribe
+    public void onEvent(Event event) {
+        if (event.getMsg().equals("sign")) {
+            getPeople();
+        }
+    }
+
     private void initView() {
         sib = ViewFindUtils.find(view, R.id.looper);
         progressBar = ViewFindUtils.find(view, R.id.project_circle);
@@ -246,7 +264,7 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
 
         int totalTime = (int) (endTime - startTime) / (24 * 60 * 60 * 1000);
         int current = (int) (currentTime - startTime) / (24 * 60 * 60 * 1000);
-        Log.e("roy", "totalTime" + totalTime + "~~~~" + "current" + current);
+//        Log.e("roy", "totalTime" + totalTime + "~~~~" + "current" + current);
         float progress = (current / 365) * 100;
         int time = 365 - current;
 
@@ -287,6 +305,12 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             case 0:
                 intent2Activity(ProjectActivity.class);
                 break;
+            case 1:
+                intent2Activity(ProjectDrawing.class);
+                break;
+            case 3:
+                intent2Activity(MeetingActivity.class);
+                break;
         }
 
     }
@@ -316,5 +340,11 @@ public class HomeFragment extends BaseFragment implements AdapterView.OnItemClic
             cal.set(year, month, day);
         }
         return cal;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
     }
 }

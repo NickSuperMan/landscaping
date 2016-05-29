@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.bean.Code;
 import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.utils.ConnService;
@@ -33,6 +34,7 @@ public class ModifyNoteActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_note_add);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.note_add)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

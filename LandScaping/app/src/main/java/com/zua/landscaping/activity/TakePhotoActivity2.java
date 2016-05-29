@@ -4,14 +4,10 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 
-import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -31,13 +27,11 @@ import net.tsz.afinal.http.AjaxParams;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by roy on 4/28/16.
  */
-public class TakePhotoActivity extends Activity {
+public class TakePhotoActivity2 extends Activity {
 
     private ImageView imageView;
     private File file;
@@ -105,7 +99,7 @@ public class TakePhotoActivity extends Activity {
 
     private void uploadPhoto() {
         if (null == dialog) {
-            dialog = ProgressDialog.show(TakePhotoActivity.this, null, getString(R.string.photo_landing));
+            dialog = ProgressDialog.show(TakePhotoActivity2.this, null, getString(R.string.photo_landing));
         }
         String description = editText.getText().toString().trim();
 
@@ -127,7 +121,7 @@ public class TakePhotoActivity extends Activity {
             @Override
             public void onSuccess(Object o) {
                 super.onSuccess(o);
-                ToastUtils.showShort(TakePhotoActivity.this, "upload success");
+                ToastUtils.showShort(TakePhotoActivity2.this, "upload success");
                 if (dialog.isShowing()) {
                     dialog.dismiss();
                 }

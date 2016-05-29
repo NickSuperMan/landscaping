@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.utils.TitleBuilder;
 
 import java.lang.ref.WeakReference;
@@ -58,6 +59,7 @@ public class RecordVideoActivity extends Activity implements View.OnTouchListene
         mRecorder = new WXLikeVideoRecorder(this, FileUtil.MEDIA_FILE_DIR);
         mRecorder.setOutputSize(OUTPUT_WIDTH, OUTPUT_HEIGHT);
         setContentView(R.layout.activity_layout_record);
+        App.getInstance().addActivity(this);
 
         new TitleBuilder(this).setTitleText(getString(R.string.record)).setLeftImage(R.drawable.back).setLeftClickListener(new View.OnClickListener() {
             @Override

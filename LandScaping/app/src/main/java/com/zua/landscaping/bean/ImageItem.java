@@ -64,5 +64,4 @@ public class ImageItem implements Serializable {
         this.bitmap = bitmap;
     }
 
-
 }

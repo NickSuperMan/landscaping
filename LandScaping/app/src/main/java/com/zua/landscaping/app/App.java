@@ -1,5 +1,6 @@
 package com.zua.landscaping.app;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -22,6 +23,8 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 import com.squareup.leakcanary.LeakCanary;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.Drawing;
+import com.zua.landscaping.bean.Meeting;
 import com.zua.landscaping.bean.News;
 import com.zua.landscaping.bean.Note;
 import com.zua.landscaping.bean.Project;
@@ -34,6 +37,7 @@ import com.zua.landscaping.utils.RongCouldEvent;
 import com.zua.landscaping.utils.ToastUtils;
 
 import java.io.File;
+import java.util.LinkedList;
 import java.util.List;
 
 import io.rong.imkit.RongIM;
@@ -64,19 +68,38 @@ public class App extends Application implements BDLocationListener {
     private static List<Technical> technicalList;
     private static List<Note> noteList;
     private static List<News> newsList;
+    private static List<Drawing> drawingList;
+    private static List<Meeting> meetingList;
+    private List<Activity> mList = new LinkedList<Activity>();
 
+    private static App instance;
+
+    public static App getInstance() {
+        if (null == instance) {
+            synchronized (App.class) {
+                if (instance == null) {
+                    instance = new App();
+                }
+            }
+        }
+        return instance;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         weatherIsFirstIn = true;
-        LeakCanary.install(this);
+//        LeakCanary.install(this);
         initRong();
         initImageLoader();
         initLocation();
         LocalDisplay.init(getApplicationContext());
 
+    }
+
+    public void addActivity(Activity activity) {
+        mList.add(activity);
     }
 
     private static void getUserIcon() {
@@ -237,6 +260,19 @@ public class App extends Application implements BDLocationListener {
 
     }
 
+    public void exit() {
+        try {
+            for (Activity activity : mList) {
+                if (activity != null)
+                    activity.finish();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            System.exit(0);
+        }
+    }
+
     public static String getCity() {
         return city;
     }
@@ -349,5 +385,27 @@ public class App extends Application implements BDLocationListener {
 
     public static void setNewsList(List<News> newsList) {
         App.newsList = newsList;
+    }
+
+    public static List<Drawing> getDrawingList() {
+        return drawingList;
+    }
+
+    public static void setDrawingList(List<Drawing> drawingList) {
+        App.drawingList = drawingList;
+    }
+
+    public static List<Meeting> getMeetingList() {
+        return meetingList;
+    }
+
+    public static void setMeetingList(List<Meeting> meetingList) {
+        App.meetingList = meetingList;
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        System.gc();
     }
 }

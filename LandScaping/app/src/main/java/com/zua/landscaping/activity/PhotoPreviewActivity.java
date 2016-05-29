@@ -14,6 +14,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.zua.landscaping.R;
+import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 
 import uk.co.senab.photoview.PhotoView;
@@ -35,6 +36,8 @@ public class PhotoPreviewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_photo_preview);
+        App.getInstance().addActivity(this);
+
         Intent intent = getIntent();
         url = intent.getStringExtra("url");
 
