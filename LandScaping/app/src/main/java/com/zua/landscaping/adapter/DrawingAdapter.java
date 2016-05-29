@@ -14,6 +14,7 @@ import com.zua.landscaping.R;
 import com.zua.landscaping.app.App;
 import com.zua.landscaping.app.Constant;
 import com.zua.landscaping.bean.Device;
+import com.zua.landscaping.bean.Drawing;
 
 import java.util.List;
 
@@ -24,13 +25,13 @@ import java.util.List;
 public class DrawingAdapter extends BaseAdapter {
 
     private LayoutInflater inflater;
-    private List<Device> deviceList;
+    private List<Drawing> drawingList;
     private ImageLoader imageLoader;
     private DisplayImageOptions options;
 
-    public DrawingAdapter(Context context) {
+    public DrawingAdapter(Context context, List<Drawing> data) {
         inflater = LayoutInflater.from(context);
-        deviceList = App.getDeviceList();
+        drawingList = data;
 
         imageLoader = ImageLoader.getInstance();
         options = new DisplayImageOptions.Builder()
@@ -41,12 +42,12 @@ public class DrawingAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return deviceList == null ? 0 : deviceList.size();
+        return drawingList == null ? 0 : drawingList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return deviceList.get(position);
+        return drawingList.get(position);
     }
 
     @Override
@@ -59,27 +60,30 @@ public class DrawingAdapter extends BaseAdapter {
         ViewHolder holder = null;
 
         if (convertView == null) {
-            convertView = inflater.inflate(R.layout.activity_layout_device_item, null);
+            convertView = inflater.inflate(R.layout.activity_layout_drawing_item, null);
             holder = new ViewHolder();
-            holder.imageView = (ImageView) convertView.findViewById(R.id.item_device_image);
-            holder.tv_name = (TextView) convertView.findViewById(R.id.item_device_name);
-            holder.tv_owner = (TextView) convertView.findViewById(R.id.item_device_owner);
+            holder.imageView = (ImageView) convertView.findViewById(R.id.item_drawing_img);
+            holder.tv_name = (TextView) convertView.findViewById(R.id.item_drawing_name);
+
 
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
 
-        imageLoader.displayImage(Constant.BasePath + deviceList.get(position).getDevicecPicUrl(), holder.imageView, options);
+        imageLoader.displayImage(Constant.BasePath + drawingList.get(position).getDrawPicUrl(), holder.imageView, options);
 
-        holder.tv_name.setText(deviceList.get(position).getDeviceName() + "");
-        holder.tv_owner.setText(deviceList.get(position).getDeviceOwner() + "");
+        holder.tv_name.setText(drawingList.get(position).getDrawName() + "");
+
         return convertView;
+    }
+
+    public List<Drawing> getDataList() {
+        return drawingList;
     }
 
     class ViewHolder {
         ImageView imageView;
         TextView tv_name;
-        TextView tv_owner;
     }
 }

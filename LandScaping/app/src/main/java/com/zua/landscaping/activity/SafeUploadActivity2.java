@@ -82,6 +82,7 @@ public class SafeUploadActivity2 extends Activity {
             @Override
             public void onClick(View v) {
                 upload();
+                BitmapUtils.tempSelectBitmap.clear();
                 finish();
             }
         }).build();

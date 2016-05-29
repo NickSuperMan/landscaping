@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.graphics.Bitmap;
-
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -64,9 +63,11 @@ public class TakePhotoActivity2 extends Activity {
 
         file = BitmapUtils.getImageFile();
 
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-        startActivityForResult(intent, 1);
+
+
+        Intent openCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(openCameraIntent, 1);
+
     }
 
 
@@ -75,24 +76,10 @@ public class TakePhotoActivity2 extends Activity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == Activity.RESULT_OK || requestCode == 1) {
+            Bitmap bm = (Bitmap) data.getExtras().get("data");
+            BitmapUtils.saveBitmap(bm, file);
+            imageView.setImageBitmap(bm);
 
-            Uri uri = Uri.fromFile(file);
-
-            Log.e("roy", uri.toString() + "~~~~~~");
-
-            ContentResolver resolver = getContentResolver();
-
-            if (uri != null) {
-
-                try {
-
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(resolver, uri);
-                    imageView.setImageBitmap(bitmap);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
         }
     }
 
