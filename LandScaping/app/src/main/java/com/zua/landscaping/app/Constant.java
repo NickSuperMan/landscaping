@@ -5,7 +5,7 @@ package com.zua.landscaping.app;
  */
 public class Constant {
 
-    public static final String BasePath = "http://115.29.140.176:8080/LandScaping/";
+    public static final String BasePath = "http://121.42.45.159:8080/LandScaping/";
 
 //    public static final String BasePath = "http://192.168.1.102:8080/LandScaping/";
 

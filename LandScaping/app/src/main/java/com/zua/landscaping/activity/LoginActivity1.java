@@ -136,7 +136,7 @@ public class LoginActivity1 extends Activity implements View.OnClickListener {
 
                 if (response.isSuccess()) {
                     User user = response.body();
-                    ToastUtils.showShort(LoginActivity1.this, user.toString());
+//                    ToastUtils.showShort(LoginActivity1.this, user.toString());
 
                     if (user != null) {
                         App.setUser(user);

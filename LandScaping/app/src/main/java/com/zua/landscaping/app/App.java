@@ -250,7 +250,7 @@ public class App extends Application implements BDLocationListener {
                 this.position = near;
             }
             mLocationClient.stop();
-            ToastUtils.showShort(this, "city" + city + "~~~~" + near);
+//            ToastUtils.showShort(this, "city" + city + "~~~~" + near);
         } else {
             if (bdLocation != null) {
                 bdLocation = null;
